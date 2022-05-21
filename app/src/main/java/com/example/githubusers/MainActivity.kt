@@ -2,7 +2,9 @@ package com.example.githubusers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentManager
 import com.example.githubusers.databinding.ActivityMainBinding
+import com.example.githubusers.screens.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +15,11 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.frame_layout_main_activity, MainFragment())
+            .commit()
 
     }
 }
