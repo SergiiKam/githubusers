@@ -2,9 +2,8 @@ package com.example.githubusers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
 import com.example.githubusers.databinding.ActivityMainBinding
-import com.example.githubusers.screens.main.MainFragment
+import com.example.githubusers.screens.main.StartFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frame_layout_main_activity, MainFragment())
+            .replace(R.id.frame_layout_main_activity, StartFragment())
             .commit()
 
     }
