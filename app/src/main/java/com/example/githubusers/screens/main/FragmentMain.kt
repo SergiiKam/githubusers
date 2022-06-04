@@ -5,12 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentMainBinding
 
-class StartFragment : Fragment() {
+class FragmentMain : Fragment() {
 
     lateinit var binding: FragmentMainBinding
     lateinit var viewModel: StartViewModel
@@ -31,8 +32,13 @@ class StartFragment : Fragment() {
 
         recyclerView = binding.recView
 
-        adapter = StartAdapter(viewModel.UserList)
+        adapter = StartAdapter()
+
         recyclerView.adapter = adapter
+
+        viewModel.UserList.observe(viewLifecycleOwner) {
+            adapter.setList(it)
+        }
 
         return binding.root
     }

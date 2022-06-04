@@ -1,5 +1,8 @@
 package com.example.githubusers.model
 
+import androidx.room.Entity
+
+@Entity
 data class UsersItem(
     val avatar_url: String,
     val events_url: String,
