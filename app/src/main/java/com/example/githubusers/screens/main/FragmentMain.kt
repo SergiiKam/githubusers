@@ -6,15 +6,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
+@AndroidEntryPoint
 class FragmentMain : Fragment() {
 
+    private val viewModel : StartViewModel by viewModels()
+    //private lateinit var viewModel : StartViewModel
+
+
     lateinit var binding: FragmentMainBinding
-    lateinit var viewModel: StartViewModel
     lateinit var adapter: StartAdapter
     lateinit var recyclerView: RecyclerView
 
@@ -26,9 +34,10 @@ class FragmentMain : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         binding = FragmentMainBinding.bind(view)
-        viewModel = ViewModelProvider(this).get(StartViewModel::class.java)
 
-        viewModel.getUserList()
+        //viewModel = ViewModelProvider(this).get(StartViewModel::class.java)
+
+        //viewModel.getUserList()
 
         recyclerView = binding.recView
 
@@ -36,7 +45,10 @@ class FragmentMain : Fragment() {
 
         recyclerView.adapter = adapter
 
-        viewModel.UserList.observe(viewLifecycleOwner) {
+        viewModel.userList.observe(viewLifecycleOwner) {
+
+            Timber.d(viewModel.userList.value?.size.toString())
+
             adapter.setList(it)
         }
 

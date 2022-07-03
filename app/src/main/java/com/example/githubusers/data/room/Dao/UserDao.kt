@@ -11,18 +11,20 @@ import com.example.githubusers.model.UsersItem
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun Insert(usersItem: UsersItem)
+    fun insert(usersItem: UsersItem)
 
     @Update
-    fun Update(usersItem: UsersItem)
+    fun update(usersItem: UsersItem)
 
     @Delete
-    fun Delete(usersItem: UsersItem)
-
+    fun delete(usersItem: UsersItem)
 
     @Query("select * from UsersItem")
-    fun getAll() : MutableLiveData<UserList>
+    fun getAll() : LiveData<List<UsersItem>>
+
+    @Query("select * from UsersItem")
+    fun getAllUsers() : List<UsersItem>
 
     @Query("select * from UsersItem where id = :id")
-    fun getUserById(id : Int)
+    fun getUserById(id : Int) : UsersItem
 }

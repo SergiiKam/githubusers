@@ -1,6 +1,7 @@
 package com.example.githubusers.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 data class UsersItem(
@@ -11,6 +12,7 @@ data class UsersItem(
     val gists_url: String,
     val gravatar_id: String,
     val html_url: String,
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     val login: String,
     val node_id: String,

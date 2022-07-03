@@ -3,16 +3,12 @@ package com.example.githubusers.screens.main
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubusers.R
 import com.example.githubusers.databinding.ItemUserLayoutBinding
-import com.example.githubusers.model.UserList
-import retrofit2.Response
+import com.example.githubusers.model.UsersItem
 
 abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerView.ViewHolder(binding.root) {
     constructor(parent: ViewGroup) : this(
@@ -24,7 +20,7 @@ class StartAdapter() : RecyclerView.Adapter<StartAdapter.ViewHold>() {
 
     class ViewHold(parent: ViewGroup) : ItemUserViewHolder(parent)
 
-    private var userList : UserList = UserList()
+    private var userList : List<UsersItem> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHold {
         return ViewHold(parent)
@@ -48,10 +44,11 @@ class StartAdapter() : RecyclerView.Adapter<StartAdapter.ViewHold>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: UserList) {
+    fun setList(list: List<UsersItem>) {
 
         userList = list
 
         notifyDataSetChanged()
     }
 }
+
