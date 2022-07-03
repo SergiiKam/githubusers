@@ -12,6 +12,7 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 
 interface RepInterface {
-    suspend fun getAllUsers() : LiveData<List<UsersItem>>
+    fun getAllUsers() : LiveData<List<UsersItem>>
+    suspend fun updateListApi()
 }
 

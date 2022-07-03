@@ -19,8 +19,6 @@ import timber.log.Timber
 class FragmentMain : Fragment() {
 
     private val viewModel : StartViewModel by viewModels()
-    //private lateinit var viewModel : StartViewModel
-
 
     lateinit var binding: FragmentMainBinding
     lateinit var adapter: StartAdapter
@@ -35,24 +33,35 @@ class FragmentMain : Fragment() {
 
         binding = FragmentMainBinding.bind(view)
 
-        //viewModel = ViewModelProvider(this).get(StartViewModel::class.java)
-
-        //viewModel.getUserList()
-
         recyclerView = binding.recView
 
         adapter = StartAdapter()
 
         recyclerView.adapter = adapter
 
+        Timber.d("onCreateView")
+
+//        viewModel.userList.observe(viewLifecycleOwner) {
+//
+//            Timber.d(viewModel.userList.value?.size.toString())
+//
+//            adapter.setList(it)
+//        }
+
+        viewModel.onReady.observe(viewLifecycleOwner) {
+            onReady()
+        }
+
+        return binding.root
+    }
+
+    fun onReady() {
         viewModel.userList.observe(viewLifecycleOwner) {
 
             Timber.d(viewModel.userList.value?.size.toString())
 
             adapter.setList(it)
         }
-
-        return binding.root
     }
 
 }

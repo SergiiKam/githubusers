@@ -9,6 +9,7 @@ import com.example.githubusers.model.UsersItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -17,15 +18,32 @@ class StartViewModel @Inject constructor(
     private val repository: RepInterface
 ) : ViewModel() {
 
-    var userList : LiveData<List<UsersItem>> = MutableLiveData()
+    lateinit var userList : LiveData<List<UsersItem>>
+
+    val onReady : MutableLiveData<Unit> = MutableLiveData()
+
+//    val userList : LiveData<List<UsersItem>> by lazy {
+//        repository.getAllUsers()
+//    }
 
     init {
         getUserList()
+
     }
 
     private fun getUserList() {
         viewModelScope.launch(Dispatchers.IO) {
+
+            Timber.d("getUserList")
+
             userList = repository.getAllUsers()
+
+            onReady.postValue(Unit)
+
+            repository.updateListApi()
+
+            Timber.d("userList=$userList")
+
         }
     }
 
