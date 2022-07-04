@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.githubusers.databinding.ActivityMainBinding
 import com.example.githubusers.screens.main.FragmentMain
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="photo">photo</string>
     <string name="user">user</string>
+    <string name="id">id</string>
+    <string name="html_url">html URL</string>
 </resources>

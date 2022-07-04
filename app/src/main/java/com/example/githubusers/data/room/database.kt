@@ -12,17 +12,4 @@ abstract class Dbase : RoomDatabase() {
 
     abstract fun getUserDao() : UserDao
 
-//    companion object {
-//        private var database : Dbase ?= null
-//
-//        @Synchronized
-//        fun getInstance(context: Context) : Dbase {
-//
-//            if (database == null) {
-//                database = Room.databaseBuilder(context, Dbase::class.java, "database").build()
-//            }
-//
-//            return database as Dbase
-//        }
-//    }
 }

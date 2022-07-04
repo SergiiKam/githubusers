@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.githubusers.data.repository.RepInterface
 import com.example.githubusers.model.UsersItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -19,20 +20,19 @@ class StartViewModel @Inject constructor(
 ) : ViewModel() {
 
     lateinit var userList : LiveData<List<UsersItem>>
-
     val onReady : MutableLiveData<Unit> = MutableLiveData()
 
-//    val userList : LiveData<List<UsersItem>> by lazy {
-//        repository.getAllUsers()
-//    }
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{
+            _, throwable ->
+        throwable.printStackTrace()
+    }
 
     init {
         getUserList()
-
     }
 
     private fun getUserList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
             Timber.d("getUserList")
 

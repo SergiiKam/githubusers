@@ -2,6 +2,7 @@ package com.example.githubusers.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
 data class UsersItem(
@@ -24,4 +25,4 @@ data class UsersItem(
     val subscriptions_url: String,
     val type: String,
     val url: String
-)
+) : Serializable

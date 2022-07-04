@@ -1,4 +1,4 @@
-package com.example.githubusers.screens.main
+package com.example.githubusers
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

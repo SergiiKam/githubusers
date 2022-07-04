@@ -11,9 +11,6 @@ class LogicDataRetrofit {
 
     suspend fun getAllUsers(): UserList {
 
-        Timber.d("-> LogicDataRetrofit")
-        Log.d("debug", "LogicDataRetrofit 'getAllUsers' ")
-
         return RetrofitInstance.api.getListUsers()
 
     }

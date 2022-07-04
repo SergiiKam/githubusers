@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentMainBinding
+import com.example.githubusers.screens.activity.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -35,18 +36,11 @@ class FragmentMain : Fragment() {
 
         recyclerView = binding.recView
 
-        adapter = StartAdapter()
+        adapter = StartAdapter(::onAdapterClick)
 
         recyclerView.adapter = adapter
 
         Timber.d("onCreateView")
-
-//        viewModel.userList.observe(viewLifecycleOwner) {
-//
-//            Timber.d(viewModel.userList.value?.size.toString())
-//
-//            adapter.setList(it)
-//        }
 
         viewModel.onReady.observe(viewLifecycleOwner) {
             onReady()
@@ -55,7 +49,7 @@ class FragmentMain : Fragment() {
         return binding.root
     }
 
-    fun onReady() {
+    private fun onReady() {
         viewModel.userList.observe(viewLifecycleOwner) {
 
             Timber.d(viewModel.userList.value?.size.toString())
@@ -64,4 +58,13 @@ class FragmentMain : Fragment() {
         }
     }
 
+    private fun onAdapterClick(bundle : Bundle){
+        val userDetails : UserDetails = UserDetails()
+        userDetails.arguments = bundle
+
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.frame_layout_main_activity, userDetails)
+            .commit()
+    }
 }

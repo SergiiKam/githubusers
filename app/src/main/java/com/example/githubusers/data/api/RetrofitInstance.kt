@@ -9,10 +9,6 @@ import timber.log.Timber
 object RetrofitInstance {
     private val retrofit by lazy {
 
-        Log.d("debug", "retrofit by lazy'")
-
-        //Timber.d("RetrofitInstance 'retrofit by lazy'")
-
         Retrofit.Builder()
             .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -20,12 +16,6 @@ object RetrofitInstance {
     }
 
     val api : ApiService by lazy {
-
-        //Timber.d("RetrofitInstance 'ApiService by lazy'")
-        Log.d("debug", "'ApiService by lazy'")
-
-
-        //Log.d("debug", "retrofit 1.2")
         retrofit.create(ApiService::class.java)
     }
 }
