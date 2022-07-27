@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentUserDetailsBinding
 import com.example.githubusers.model.UsersItem
@@ -24,8 +25,14 @@ class UserDetails : Fragment() {
 
         usersItem = arguments?.getSerializable("usersItem") as UsersItem
 
-        binding.detailsHtmlUrl.text = usersItem.html_url
-        binding.detailsId.text = usersItem.id.toString()
+        Glide
+            .with(this)
+            .load(usersItem.avatar_url)
+            .centerCrop()
+            .into(binding.image)
+
+        binding.detailsEmail.text = usersItem.html_url
+        binding.detailsDateCreate.text = usersItem.id.toString()
         binding.detailsName.text = usersItem.login
 
         binding.buttonBack.setOnClickListener {
