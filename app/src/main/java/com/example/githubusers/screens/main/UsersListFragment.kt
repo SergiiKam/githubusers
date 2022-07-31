@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class FragmentMain : Fragment() {
+class UsersListFragment : Fragment() {
 
     private val viewModel : StartViewModel by viewModels()
 

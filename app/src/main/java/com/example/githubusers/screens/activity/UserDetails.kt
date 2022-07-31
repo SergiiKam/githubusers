@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentUserDetailsBinding
 import com.example.githubusers.model.UsersItem
-import com.example.githubusers.screens.main.FragmentMain
+import com.example.githubusers.screens.main.UsersListFragment
 
 class UserDetails : Fragment() {
 
@@ -31,17 +31,24 @@ class UserDetails : Fragment() {
             .centerCrop()
             .into(binding.image)
 
-        binding.detailsEmail.text = usersItem.html_url
-        binding.detailsDateCreate.text = usersItem.id.toString()
-        binding.detailsName.text = usersItem.login
+        return binding.apply {
 
-        binding.buttonBack.setOnClickListener {
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.frame_layout_main_activity, FragmentMain())
-                .commit()
-        }
+            binding.detailsEmail.text = usersItem.html_url
+            binding.detailsDateCreate.text = usersItem.id.toString()
+            binding.detailsName.text = usersItem.login
 
-        return binding.root
+            binding.buttonBack.setOnClickListener {
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frame_layout_main_activity, UsersListFragment())
+                    .commit()
+            }
+        }.root
+    }
+
+    override fun onDestroyView() {
+
+        
+        super.onDestroyView()
     }
 }
