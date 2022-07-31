@@ -1,15 +1,13 @@
 package com.example.githubusers.data.logicData
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.githubusers.data.room.Dao.UserDao
 import com.example.githubusers.model.UserList
-import com.example.githubusers.model.UsersItem
-import timber.log.Timber
+import com.example.githubusers.model.UsersItemEntity
 
 class LogicDataRoom(var dao: UserDao) {
 
-    fun getAllUsers(): LiveData<List<UsersItem>> {
+    fun getAllUsers(): LiveData<List<UsersItemEntity>> {
 
         return dao.getAll()
 

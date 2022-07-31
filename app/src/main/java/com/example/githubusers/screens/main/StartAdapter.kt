@@ -2,18 +2,14 @@ package com.example.githubusers.screens.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubusers.R
 import com.example.githubusers.databinding.ItemUserLayoutBinding
-import com.example.githubusers.model.UsersItem
-import com.example.githubusers.screens.activity.UserDetails
-import timber.log.Timber
+import com.example.githubusers.model.UsersItemEntity
+
 
 abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerView.ViewHolder(binding.root) {
     constructor(parent: ViewGroup) : this(
@@ -25,7 +21,7 @@ class StartAdapter(var callBack: (Bundle) -> Unit) : RecyclerView.Adapter<StartA
 
     class ViewHold(parent: ViewGroup) : ItemUserViewHolder(parent)
 
-    private var userList : List<UsersItem> = emptyList()
+    private var userList : List<UsersItemEntity> = emptyList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHold {
@@ -55,7 +51,7 @@ class StartAdapter(var callBack: (Bundle) -> Unit) : RecyclerView.Adapter<StartA
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<UsersItem>) {
+    fun setList(list: List<UsersItemEntity>) {
 
         userList = list
 

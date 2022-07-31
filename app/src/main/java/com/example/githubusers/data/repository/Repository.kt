@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.githubusers.data.logicData.LogicDataRetrofit
 import com.example.githubusers.data.logicData.LogicDataRoom
 import com.example.githubusers.model.UserList
-import com.example.githubusers.model.UsersItem
+import com.example.githubusers.model.UsersItemEntity
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -19,7 +19,7 @@ class Repository @Inject constructor(
         logicDataRoom.insertUserList(userList)
     }
 
-    override fun getAllUsers(): LiveData<List<UsersItem>> {
+    override fun getAllUsers(): LiveData<List<UsersItemEntity>> {
         return logicDataRoom.getAllUsers()
     }
 

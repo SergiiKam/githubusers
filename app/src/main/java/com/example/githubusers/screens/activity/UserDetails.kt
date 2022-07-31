@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentUserDetailsBinding
-import com.example.githubusers.model.UsersItem
+import com.example.githubusers.model.UsersItemEntity
 import com.example.githubusers.screens.main.UsersListFragment
 
 class UserDetails : Fragment() {
 
     private lateinit var binding: FragmentUserDetailsBinding
-    private lateinit var usersItem: UsersItem
+    private lateinit var usersItem: UsersItemEntity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +23,7 @@ class UserDetails : Fragment() {
 
         binding = FragmentUserDetailsBinding.inflate(layoutInflater, container, false)
 
-        usersItem = arguments?.getSerializable("usersItem") as UsersItem
+        usersItem = arguments?.getSerializable("usersItem") as UsersItemEntity
 
         Glide
             .with(this)
@@ -47,8 +47,6 @@ class UserDetails : Fragment() {
     }
 
     override fun onDestroyView() {
-
-        
         super.onDestroyView()
     }
 }

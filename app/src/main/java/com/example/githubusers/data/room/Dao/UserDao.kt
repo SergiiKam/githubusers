@@ -1,30 +1,28 @@
 package com.example.githubusers.data.room.Dao
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import androidx.room.Dao
-import com.example.githubusers.model.UserList
-import com.example.githubusers.model.UsersItem
+import com.example.githubusers.model.UsersItemEntity
 
 @Dao
 interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(usersItem: UsersItem)
+    fun insert(usersItem: UsersItemEntity)
 
     @Update
-    fun update(usersItem: UsersItem)
+    fun update(usersItem: UsersItemEntity)
 
     @Delete
-    fun delete(usersItem: UsersItem)
+    fun delete(usersItem: UsersItemEntity)
 
-    @Query("select * from UsersItem")
-    fun getAll() : LiveData<List<UsersItem>>
+    @Query("select * from UsersItemEntity")
+    fun getAll() : LiveData<List<UsersItemEntity>>
 
-    @Query("select * from UsersItem")
-    fun getAllUsers() : List<UsersItem>
+    @Query("select * from UsersItemEntity")
+    fun getAllUsers() : List<UsersItemEntity>
 
-    @Query("select * from UsersItem where id = :id")
-    fun getUserById(id : Int) : UsersItem
+    @Query("select * from UsersItemEntity where id = :id")
+    fun getUserById(id : Int) : UsersItemEntity
 }

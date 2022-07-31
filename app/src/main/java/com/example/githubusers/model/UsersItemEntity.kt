@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity
-data class UsersItem(
+data class UsersItemEntity(
     val avatar_url: String,
     val events_url: String,
     val followers_url: String,

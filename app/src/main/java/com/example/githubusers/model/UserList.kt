@@ -1,3 +1,3 @@
 package com.example.githubusers.model
 
-class UserList : ArrayList<UsersItem>()
+class UserList : ArrayList<UsersItemEntity>()
