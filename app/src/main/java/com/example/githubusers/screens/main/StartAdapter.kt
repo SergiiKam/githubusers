@@ -30,9 +30,9 @@ class StartAdapter(var callBack: (Bundle) -> Unit) : RecyclerView.Adapter<StartA
 
     override fun onBindViewHolder(holder: ViewHold, position: Int) {
 
-        holder.binding.userName.text = "name - ${userList[position].login}"
+        holder.binding.userName.text = userList[position].login
 
-        holder.binding.userId.text = "id - ${userList[position].id.toString()}"
+        holder.binding.userId.text = userList[position].id.toString()
 
         Glide
             .with(holder.itemView)
