@@ -51,7 +51,8 @@ class UsersListFragment : Fragment() {
 
             Timber.d(viewModel.userList.value?.size.toString())
 
-            adapter.setList(it)
+            //adapter.setList(it)
+            adapter.submitList(it)
         }
     }
 

@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubusers.R
 import com.example.githubusers.databinding.ItemUserLayoutBinding
 import com.example.githubusers.model.UsersItemEntity
+import okhttp3.internal.notify
 
 
 abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerView.ViewHolder(binding.root) {
@@ -17,12 +20,11 @@ abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerV
     )
 }
 
-class StartAdapter(var callBack: (Bundle) -> Unit) : RecyclerView.Adapter<StartAdapter.ViewHold>() {
+class StartAdapter(var callBack: (Bundle) -> Unit) : ListAdapter<UsersItemEntity,StartAdapter.ViewHold>(UserListDiffCallBack()) {
 
     class ViewHold(parent: ViewGroup) : ItemUserViewHolder(parent)
 
-    private var userList : List<UsersItemEntity> = emptyList()
-
+    //private var userList : List<UsersItemEntity> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHold {
         return ViewHold(parent)
@@ -30,39 +32,61 @@ class StartAdapter(var callBack: (Bundle) -> Unit) : RecyclerView.Adapter<StartA
 
     override fun onBindViewHolder(holder: ViewHold, position: Int) {
 
-        holder.binding.userName.text = userList[position].login
+        holder.binding.apply {
 
-        holder.binding.userId.text = userList[position].id.toString()
+            val item = getItem(position)
 
-        Glide
-            .with(holder.itemView)
-            .load(userList[position].avatar_url)
-            .centerCrop()
-            .into(holder.binding.ivImage)
+            userName.text = item.login
+            userId.text = item.id.toString()
 
-        holder.binding.linearItemLayout.setOnClickListener {
-            linearLayoutOnClick(position)
+            Glide
+                .with(holder.itemView)
+                .load(item.avatar_url)
+                .centerCrop()
+                .into(ivImage)
+
+            linearItemLayout.setOnClickListener {
+                linearLayoutOnClick(position)
+            }
         }
 
     }
 
-    override fun getItemCount(): Int {
-        return userList.size
-    }
+//    override fun getItemCount(): Int {
+//        return userList.size
+//    }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<UsersItemEntity>) {
-
-        userList = list
-
-        notifyDataSetChanged()
-    }
+//    fun setList(list: List<UsersItemEntity>) {
+//
+//        userList = list
+//
+//        userList.forEach {
+//            notifyItemInserted(it.id)
+//        }
+//
+//        //notifyDataSetChanged()
+//    }
 
     private fun linearLayoutOnClick(position : Int) {
         val bundle = Bundle()
-        bundle.putSerializable("usersItem", userList[position])
+        bundle.putSerializable("usersItem", getItem(position))
 
         callBack(bundle)
     }
+
+    class UserListDiffCallBack : DiffUtil.ItemCallback<UsersItemEntity>() {
+        override fun areItemsTheSame(oldItem: UsersItemEntity, newItem: UsersItemEntity): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: UsersItemEntity,
+            newItem: UsersItemEntity
+        ): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+
 }
 
