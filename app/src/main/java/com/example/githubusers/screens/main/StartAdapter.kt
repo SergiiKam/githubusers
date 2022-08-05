@@ -20,11 +20,9 @@ abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerV
     )
 }
 
-class StartAdapter(var callBack: (Bundle) -> Unit) : ListAdapter<UsersItemEntity,StartAdapter.ViewHold>(UserListDiffCallBack()) {
+class StartAdapter(var callBack: (Bundle) -> Unit) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(UserListDiffCallBack()) {
 
     class ViewHold(parent: ViewGroup) : ItemUserViewHolder(parent)
-
-    //private var userList : List<UsersItemEntity> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHold {
         return ViewHold(parent)
@@ -51,21 +49,6 @@ class StartAdapter(var callBack: (Bundle) -> Unit) : ListAdapter<UsersItemEntity
         }
 
     }
-
-//    override fun getItemCount(): Int {
-//        return userList.size
-//    }
-
-//    fun setList(list: List<UsersItemEntity>) {
-//
-//        userList = list
-//
-//        userList.forEach {
-//            notifyItemInserted(it.id)
-//        }
-//
-//        //notifyDataSetChanged()
-//    }
 
     private fun linearLayoutOnClick(position : Int) {
         val bundle = Bundle()

@@ -13,4 +13,10 @@
 .externalNativeBuild
 .cxx
 local.properties
-/.idea/misc.xml
+.idea/*
+!.idea/runConfigurations/
+!.idea/runConfigurations/*
+!.idea/dictionaries/
+!.idea/dictionaries/*
+!.idea/codeStyles/
+!.idea/codeStyles/*

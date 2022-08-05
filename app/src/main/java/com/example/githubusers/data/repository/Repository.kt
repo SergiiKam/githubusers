@@ -3,17 +3,21 @@ package com.example.githubusers.data.repository
 import androidx.lifecycle.LiveData
 import com.example.githubusers.data.logicData.LogicDataRetrofit
 import com.example.githubusers.data.logicData.LogicDataRoom
+import com.example.githubusers.model.UserDetailsEntity
 import com.example.githubusers.model.UserList
 import com.example.githubusers.model.UsersItemEntity
 import javax.inject.Inject
 
 class Repository @Inject constructor(
     private val logicDataRoom : LogicDataRoom
-    ) : RepInterface  {
+    ) : UsersRepository  {
+
+    private val logicDataRetrofit : LogicDataRetrofit by lazy {
+        LogicDataRetrofit()
+    }
 
     override suspend fun updateListApi() {
 
-        val logicDataRetrofit : LogicDataRetrofit = LogicDataRetrofit()
         val userList : UserList = logicDataRetrofit.getAllUsers()
 
         logicDataRoom.insertUserList(userList)
@@ -23,5 +27,8 @@ class Repository @Inject constructor(
         return logicDataRoom.getAllUsers()
     }
 
+    override suspend fun getUserDetail(usersItemEntity: UsersItemEntity): UserDetailsEntity {
+        return logicDataRetrofit.getUserDetails(usersItemEntity)
+    }
 
 }
