@@ -39,9 +39,9 @@ class UsersListFragment : Fragment() {
 
         Timber.d("onCreateView")
 
-        viewModel.onReady.observe(viewLifecycleOwner) {
+        //viewModel.onReady.observe(viewLifecycleOwner) {
             onReady()
-        }
+        //}
 
         return binding.root
     }
@@ -62,6 +62,7 @@ class UsersListFragment : Fragment() {
         requireActivity().supportFragmentManager
             .beginTransaction()
             .replace(R.id.frame_layout_main_activity, userDetails)
+            .addToBackStack(null)
             .commit()
     }
 }

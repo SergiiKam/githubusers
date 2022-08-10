@@ -1,9 +1,9 @@
 package com.example.githubusers.data.room.Dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.Dao
 import com.example.githubusers.model.UsersItemEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
@@ -18,7 +18,7 @@ interface UserDao {
     fun delete(usersItem: UsersItemEntity)
 
     @Query("select * from UsersItemEntity")
-    fun getAll() : LiveData<List<UsersItemEntity>>
+    fun getAll() : Flow<List<UsersItemEntity>>
 
     @Query("select * from UsersItemEntity")
     fun getAllUsers() : List<UsersItemEntity>

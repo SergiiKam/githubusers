@@ -9,6 +9,7 @@ import com.example.githubusers.model.UsersItemEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -19,8 +20,7 @@ class StartViewModel @Inject constructor(
     private val repository: UsersRepository
 ) : ViewModel() {
 
-    lateinit var userList : LiveData<List<UsersItemEntity>>
-    val onReady : MutableLiveData<Unit> = MutableLiveData()
+    var userList : MutableLiveData<List<UsersItemEntity>> = MutableLiveData()
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{
             _, throwable ->
@@ -36,9 +36,9 @@ class StartViewModel @Inject constructor(
 
             Timber.d("getUserList")
 
-            userList = repository.getAllUsers()
-
-            onReady.postValue(Unit)
+            repository.getAllUsers().collect() {
+                userList.postValue(it)
+            }
 
             repository.updateListApi()
 

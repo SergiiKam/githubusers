@@ -1,13 +1,13 @@
 package com.example.githubusers.data.logicData
 
-import androidx.lifecycle.LiveData
 import com.example.githubusers.data.room.Dao.UserDao
 import com.example.githubusers.model.UserList
 import com.example.githubusers.model.UsersItemEntity
+import kotlinx.coroutines.flow.Flow
 
 class LogicDataRoom(var dao: UserDao) {
 
-    fun getAllUsers(): LiveData<List<UsersItemEntity>> {
+    fun getAllUsers(): Flow<List<UsersItemEntity>> {
 
         return dao.getAll()
 

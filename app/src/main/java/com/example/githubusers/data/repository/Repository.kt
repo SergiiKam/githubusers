@@ -1,11 +1,12 @@
 package com.example.githubusers.data.repository
 
-import androidx.lifecycle.LiveData
 import com.example.githubusers.data.logicData.LogicDataRetrofit
 import com.example.githubusers.data.logicData.LogicDataRoom
 import com.example.githubusers.model.UserDetailsEntity
 import com.example.githubusers.model.UserList
 import com.example.githubusers.model.UsersItemEntity
+import kotlinx.coroutines.flow.Flow
+
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -23,7 +24,7 @@ class Repository @Inject constructor(
         logicDataRoom.insertUserList(userList)
     }
 
-    override fun getAllUsers(): LiveData<List<UsersItemEntity>> {
+    override fun getAllUsers(): Flow<List<UsersItemEntity>> {
         return logicDataRoom.getAllUsers()
     }
 

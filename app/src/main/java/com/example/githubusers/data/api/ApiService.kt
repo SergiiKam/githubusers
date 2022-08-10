@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface ApiService {
 
-    @GET("users")
+    @GET("users?per_page=100")
     suspend fun getListUsers(): UserList
 
     @GET("users/{username}")

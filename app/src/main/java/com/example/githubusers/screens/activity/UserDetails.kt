@@ -48,12 +48,6 @@ class UserDetails : Fragment() {
 
             viewModel.getUserDetail()
 
-            binding.buttonBack.setOnClickListener {
-                requireActivity().supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.frame_layout_main_activity, UsersListFragment())
-                    .commit()
-            }
         }.root
     }
 }
