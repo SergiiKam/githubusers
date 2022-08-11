@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentMainBinding
 import com.example.githubusers.screens.activity.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -39,20 +41,13 @@ class UsersListFragment : Fragment() {
 
         Timber.d("onCreateView")
 
-        //viewModel.onReady.observe(viewLifecycleOwner) {
-            onReady()
-        //}
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.getUsers().collectLatest {
+                adapter.submitList(it)
+            }
+        }
 
         return binding.root
-    }
-
-    private fun onReady() {
-        viewModel.userList.observe(viewLifecycleOwner) {
-
-            Timber.d(viewModel.userList.value?.size.toString())
-
-            adapter.submitList(it)
-        }
     }
 
     private fun onAdapterClick(bundle : Bundle){

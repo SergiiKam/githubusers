@@ -9,7 +9,9 @@ import com.example.githubusers.model.UsersItemEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,31 +22,10 @@ class StartViewModel @Inject constructor(
     private val repository: UsersRepository
 ) : ViewModel() {
 
-    var userList : MutableLiveData<List<UsersItemEntity>> = MutableLiveData()
+    fun getUsers(): Flow<List<UsersItemEntity>> {
 
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{
-            _, throwable ->
-        throwable.printStackTrace()
-    }
+        return repository.getAllUsers()
 
-    init {
-        getUserList()
-    }
-
-    private fun getUserList() {
-        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-
-            Timber.d("getUserList")
-
-            repository.getAllUsers().collect() {
-                userList.postValue(it)
-            }
-
-            repository.updateListApi()
-
-            Timber.d("userList=$userList")
-
-        }
     }
 
 }
