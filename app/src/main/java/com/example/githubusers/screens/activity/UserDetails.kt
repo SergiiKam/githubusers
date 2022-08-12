@@ -14,9 +14,7 @@ import com.example.githubusers.screens.main.UsersListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserDetails : Fragment() {
-
-    private lateinit var binding: FragmentUserDetailsBinding
+class UserDetails : BaseFragment<FragmentUserDetailsBinding>() {
 
     private val viewModel : UserDetailsViewModel by viewModels()
 
@@ -25,25 +23,25 @@ class UserDetails : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentUserDetailsBinding.inflate(layoutInflater, container, false)
+        setBinding(FragmentUserDetailsBinding.inflate(layoutInflater, container, false))
 
-        return binding.apply {
+        return getBinding().apply {
 
             viewModel.user = arguments?.getSerializable("usersItem") as UsersItemEntity
             viewModel.userDetails.observe(viewLifecycleOwner) {
 
-                binding.detailsEmail.text       = viewModel.userDetails.value?.html_url
-                binding.detailsDateCreate.text  = viewModel.userDetails.value?.id.toString()
-                binding.detailsName.text        = viewModel.userDetails.value?.login
-                binding.detailsOrganization.text = viewModel.userDetails.value?.company
-                binding.detailsFollowing.text = viewModel.userDetails.value?.following.toString()
-                binding.detailsFollowers.text = viewModel.userDetails.value?.followers.toString()
+                getBinding().detailsEmail.text          = "email: ${viewModel.userDetails.value?.email}"
+                getBinding().detailsDateCreate.text     = "Creation date: ${viewModel.userDetails.value?.created_at.toString()}"
+                getBinding().detailsName.text           = "Login: ${viewModel.userDetails.value?.name}"
+                getBinding().detailsOrganization.text   = "Organization: ${viewModel.userDetails.value?.company}"
+                getBinding().detailsFollowing.text      = "Following: ${viewModel.userDetails.value?.following.toString()}"
+                getBinding().detailsFollowers.text      = "Followers: ${viewModel.userDetails.value?.followers.toString()}"
 
                 Glide
-                    .with(binding.root.context)
+                    .with(getBinding().root.context)
                     .load(viewModel.user.avatar_url)
                     .centerCrop()
-                    .into(binding.image)
+                    .into(getBinding().image)
             }
 
             viewModel.getUserDetail()

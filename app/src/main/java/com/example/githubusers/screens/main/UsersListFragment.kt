@@ -8,19 +8,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentMainBinding
+import com.example.githubusers.screens.activity.BaseFragment
 import com.example.githubusers.screens.activity.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import timber.log.Timber
 
 @AndroidEntryPoint
-class UsersListFragment : Fragment() {
+class UsersListFragment : BaseFragment<FragmentMainBinding>() {
 
     private val viewModel : StartViewModel by viewModels()
 
-    lateinit var binding: FragmentMainBinding
     lateinit var adapter: StartAdapter
     lateinit var recyclerView: RecyclerView
 
@@ -31,9 +32,9 @@ class UsersListFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
-        binding = FragmentMainBinding.bind(view)
+        setBinding(FragmentMainBinding.bind(view))
 
-        recyclerView = binding.recView
+        recyclerView = getBinding().recView
 
         adapter = StartAdapter(::onAdapterClick)
 
@@ -47,7 +48,7 @@ class UsersListFragment : Fragment() {
             }
         }
 
-        return binding.root
+        return getBinding().root
     }
 
     private fun onAdapterClick(bundle : Bundle){
@@ -60,4 +61,7 @@ class UsersListFragment : Fragment() {
             .addToBackStack(null)
             .commit()
     }
+
 }
+
+
