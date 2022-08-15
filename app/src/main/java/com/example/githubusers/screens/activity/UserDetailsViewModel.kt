@@ -9,6 +9,8 @@ import com.example.githubusers.model.UsersItemEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -19,11 +21,9 @@ class UserDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     lateinit var user: UsersItemEntity
-    lateinit var userDetails : MutableLiveData<UserDetailsEntity>
+    var userDetails : MutableLiveData<UserDetailsEntity> = MutableLiveData<UserDetailsEntity>()
 
-init {
-    userDetails = MutableLiveData<UserDetailsEntity>()
-}
+    var userId : Int = 0
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{
             _, throwable ->
@@ -34,8 +34,27 @@ init {
 
     fun getUserDetail() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            userDetails.postValue(repository.getUserDetail(user))
+            userDetails.postValue(repository.getUserDetailApi(user))
         }
     }
 
+    fun getUserDetailsFromRoom() : Flow<UserDetailsEntity> {
+        Timber.d(userId.toString())
+
+        val flow = repository.getUserDetailsRoom(userId)
+
+        viewModelScope.launch(Dispatchers.IO) {
+            flow.collectLatest {
+                Timber.d(it?.toString())
+            }
+        }
+
+        return flow
+    }
+
+    fun updateUserDetails() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateUserDetailsById(userId)
+        }
+    }
 }

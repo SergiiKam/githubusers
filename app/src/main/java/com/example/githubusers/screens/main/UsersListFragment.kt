@@ -21,9 +21,7 @@ import timber.log.Timber
 class UsersListFragment : BaseFragment<FragmentMainBinding>() {
 
     private val viewModel : StartViewModel by viewModels()
-
     lateinit var adapter: StartAdapter
-    lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +32,9 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
 
         setBinding(FragmentMainBinding.bind(view))
 
-        recyclerView = getBinding().recView
-
         adapter = StartAdapter(::onAdapterClick)
 
-        recyclerView.adapter = adapter
+        getBinding().recView.adapter = adapter
 
         Timber.d("onCreateView")
 

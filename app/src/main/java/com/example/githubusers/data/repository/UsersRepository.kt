@@ -9,6 +9,9 @@ interface UsersRepository {
     fun getAllUsers() : Flow<List<UsersItemEntity>>
     suspend fun updateListApi()
 
-    suspend fun getUserDetail(usersItemEntity: UsersItemEntity) : UserDetailsEntity
+    suspend fun getUserDetailApi(usersItemEntity: UsersItemEntity) : UserDetailsEntity
+
+    suspend fun updateUserDetailsById(id : Int)
+    fun getUserDetailsRoom(id : Int) : Flow<UserDetailsEntity>
 }
 

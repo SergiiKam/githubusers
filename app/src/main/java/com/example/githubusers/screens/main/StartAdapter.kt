@@ -44,15 +44,17 @@ class StartAdapter(var callBack: (Bundle) -> Unit) : ListAdapter<UsersItemEntity
                 .into(ivImage)
 
             linearItemLayout.setOnClickListener {
-                linearLayoutOnClick(position)
+//                linearLayoutOnClick(position)
+                linearLayoutOnclickId(position)
             }
         }
-
     }
 
-    private fun linearLayoutOnClick(position : Int) {
+    private fun linearLayoutOnclickId(position: Int) {
+
         val bundle = Bundle()
-        bundle.putSerializable("usersItem", getItem(position))
+
+        bundle.putInt("userId", getItem(position).id)
 
         callBack(bundle)
     }

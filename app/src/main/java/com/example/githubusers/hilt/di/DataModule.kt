@@ -9,6 +9,7 @@ import com.example.githubusers.data.repository.Repository
 import com.example.githubusers.data.room.Dao.UserDao
 import com.example.githubusers.data.room.Dbase
 import com.example.githubusers.model.UserList
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,14 +20,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class DataModule {
-    @Provides
-    @Singleton
-    fun provideRepository(logicDataRoom: LogicDataRoom) : UsersRepository {
-        return Repository(logicDataRoom)
-    }
 
     @Provides
-    fun provideUserList() : MutableLiveData<UserList> {
-        return MutableLiveData()
+    fun provideRepository(logicDataRoom: LogicDataRoom) : UsersRepository
+    {
+        return Repository(logicDataRoom)
     }
 }

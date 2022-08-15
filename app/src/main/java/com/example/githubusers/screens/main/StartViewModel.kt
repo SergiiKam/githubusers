@@ -22,6 +22,12 @@ class StartViewModel @Inject constructor(
     private val repository: UsersRepository
 ) : ViewModel() {
 
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateListApi()
+        }
+    }
+
     fun getUsers(): Flow<List<UsersItemEntity>> {
 
         return repository.getAllUsers()

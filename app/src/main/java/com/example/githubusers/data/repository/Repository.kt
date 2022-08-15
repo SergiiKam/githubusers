@@ -5,7 +5,9 @@ import com.example.githubusers.data.logicData.LogicDataRoom
 import com.example.githubusers.model.UserDetailsEntity
 import com.example.githubusers.model.UserList
 import com.example.githubusers.model.UsersItemEntity
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.*
+import timber.log.Timber
+import java.lang.Exception
 
 import javax.inject.Inject
 
@@ -28,8 +30,22 @@ class Repository @Inject constructor(
         return logicDataRoom.getAllUsers()
     }
 
-    override suspend fun getUserDetail(usersItemEntity: UsersItemEntity): UserDetailsEntity {
+    override suspend fun getUserDetailApi(usersItemEntity: UsersItemEntity): UserDetailsEntity {
         return logicDataRetrofit.getUserDetails(usersItemEntity)
     }
 
+    override suspend fun updateUserDetailsById(id : Int) {
+
+        val user = logicDataRoom.getUserById(id)
+        val userDetailsEntity = getUserDetailApi(user)
+
+        Timber.d(userDetailsEntity.toString())
+
+        logicDataRoom.insertUserDetails(userDetailsEntity)
+
+    }
+
+    override fun getUserDetailsRoom(id : Int) : Flow<UserDetailsEntity> {
+        return logicDataRoom.getUserDetails(id)
+    }
 }
