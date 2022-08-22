@@ -25,11 +25,6 @@ class RoomModule {
     }
 
     @Provides
-    fun provideLogicDataRoom(dao: UserDao) : LogicDataRoom {
-        return LogicDataRoom(dao)
-    }
-
-    @Provides
     fun provideUserDao(dbase : Dbase) : UserDao {
         return  dbase.getUserDao()
     }

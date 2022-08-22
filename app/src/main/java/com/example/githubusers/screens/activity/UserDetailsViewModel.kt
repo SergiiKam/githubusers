@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.githubusers.data.repository.UsersRepository
 import com.example.githubusers.model.UserDetailsEntity
 import com.example.githubusers.model.UsersItemEntity
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -20,9 +21,6 @@ class UserDetailsViewModel @Inject constructor(
     private val repository: UsersRepository
 ) : ViewModel() {
 
-    lateinit var user: UsersItemEntity
-    var userDetails : MutableLiveData<UserDetailsEntity> = MutableLiveData<UserDetailsEntity>()
-
     var userId : Int = 0
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{
@@ -30,12 +28,9 @@ class UserDetailsViewModel @Inject constructor(
         throwable.printStackTrace()
 
         Timber.d("Exception")
-    }
 
-    fun getUserDetail() {
-        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            userDetails.postValue(repository.getUserDetailApi(user))
-        }
+        
+
     }
 
     fun getUserDetailsFromRoom() : Flow<UserDetailsEntity> {
@@ -43,9 +38,9 @@ class UserDetailsViewModel @Inject constructor(
 
         val flow = repository.getUserDetailsRoom(userId)
 
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             flow.collectLatest {
-                Timber.d(it?.toString())
+                Timber.d(it.toString())
             }
         }
 
@@ -53,7 +48,7 @@ class UserDetailsViewModel @Inject constructor(
     }
 
     fun updateUserDetails() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             repository.updateUserDetailsById(userId)
         }
     }

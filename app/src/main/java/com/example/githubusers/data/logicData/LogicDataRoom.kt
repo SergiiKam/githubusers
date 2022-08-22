@@ -5,8 +5,9 @@ import com.example.githubusers.model.UserDetailsEntity
 import com.example.githubusers.model.UserList
 import com.example.githubusers.model.UsersItemEntity
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class LogicDataRoom(var dao: UserDao) {
+class LogicDataRoom @Inject constructor(var dao: UserDao) {
 
     fun getAllUsers(): Flow<List<UsersItemEntity>> {
 
