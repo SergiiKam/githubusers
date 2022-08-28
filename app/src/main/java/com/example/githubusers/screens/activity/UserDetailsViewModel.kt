@@ -1,14 +1,10 @@
 package com.example.githubusers.screens.activity
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.githubusers.data.repository.UsersRepository
+import com.example.githubusers.data.repository.UsersRepositoryInterface
 import com.example.githubusers.model.UserDetailsEntity
-import com.example.githubusers.model.UsersItemEntity
-import com.google.android.material.snackbar.Snackbar
+import com.example.githubusers.screens.ViewModelBase.ViewModelBase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -18,20 +14,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserDetailsViewModel @Inject constructor(
-    private val repository: UsersRepository
-) : ViewModel() {
+    private val repository: UsersRepositoryInterface
+) : ViewModelBase() {
 
     var userId : Int = 0
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{
-            _, throwable ->
-        throwable.printStackTrace()
-
-        Timber.d("Exception")
-
-        
-
-    }
 
     fun getUserDetailsFromRoom() : Flow<UserDetailsEntity> {
         Timber.d(userId.toString())
@@ -39,6 +25,7 @@ class UserDetailsViewModel @Inject constructor(
         val flow = repository.getUserDetailsRoom(userId)
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+
             flow.collectLatest {
                 Timber.d(it.toString())
             }

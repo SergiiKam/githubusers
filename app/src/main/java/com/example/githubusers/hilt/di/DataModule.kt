@@ -1,7 +1,7 @@
 package com.example.githubusers.hilt.di
 
+import com.example.githubusers.data.repository.UsersRepositoryInterface
 import com.example.githubusers.data.repository.UsersRepository
-import com.example.githubusers.data.repository.Repository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 abstract class DataModule {
 
     @Binds
-    abstract fun provideRepository(repository: Repository) : UsersRepository
+    abstract fun provideRepository(repository: UsersRepository) : UsersRepositoryInterface
 
 }

@@ -13,6 +13,7 @@ import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentMainBinding
 import com.example.githubusers.screens.activity.BaseFragment
 import com.example.githubusers.screens.activity.UserDetails
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import timber.log.Timber
@@ -41,6 +42,10 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.getUsers().collectLatest {
                 adapter.submitList(it)
+            }
+
+            viewModel.misStateFlow.collectLatest {
+                Snackbar.make(getBinding().root, it, Snackbar.LENGTH_LONG).show()
             }
         }
 

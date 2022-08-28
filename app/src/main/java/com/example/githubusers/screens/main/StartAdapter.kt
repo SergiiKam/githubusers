@@ -1,6 +1,5 @@
 package com.example.githubusers.screens.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.example.githubusers.R
 import com.example.githubusers.databinding.ItemUserLayoutBinding
 import com.example.githubusers.model.UsersItemEntity
-import okhttp3.internal.notify
 
 
 abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerView.ViewHolder(binding.root) {
