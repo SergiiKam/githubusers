@@ -52,6 +52,8 @@ class StartAdapter(var callBack: (Bundle) -> Unit) : ListAdapter<UsersItemEntity
 
         val bundle = Bundle()
 
+        bundle.putParcelable("User", getItem(position))
+
         bundle.putInt("userId", getItem(position).id)
 
         callBack(bundle)

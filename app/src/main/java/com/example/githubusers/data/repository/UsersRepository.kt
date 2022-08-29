@@ -1,6 +1,6 @@
 package com.example.githubusers.data.repository
 
-import com.example.githubusers.data.logicData.LogicDataRetrofit
+import com.example.githubusers.data.api.RetrofitInstance
 import com.example.githubusers.data.logicData.LogicDataRoom
 import com.example.githubusers.model.UserDetailsEntity
 import com.example.githubusers.model.UserList
@@ -14,24 +14,18 @@ class UsersRepository @Inject constructor(
     private val logicDataRoom : LogicDataRoom
     ) : UsersRepositoryInterface  {
 
-    private val logicDataRetrofit : LogicDataRetrofit by lazy {
-        LogicDataRetrofit()
-    }
-
     override suspend fun updateListApi() {
 
-        val userList : UserList = logicDataRetrofit.getAllUsers()
+        val userList : UserList = RetrofitInstance.api.getListUsers()
 
         logicDataRoom.insertUserList(userList)
     }
 
-    override fun getAllUsers(): Flow<List<UsersItemEntity>> {
-        return logicDataRoom.getAllUsers()
-    }
+    override fun getAllUsers(): Flow<List<UsersItemEntity>>
+            = logicDataRoom.getAllUsers()
 
-    override suspend fun getUserDetailApi(usersItemEntity: UsersItemEntity): UserDetailsEntity {
-        return logicDataRetrofit.getUserDetails(usersItemEntity)
-    }
+    override suspend fun getUserDetailApi(usersItemEntity: UsersItemEntity): UserDetailsEntity
+            = RetrofitInstance.api.getUserDetail(usersItemEntity.login!!)
 
     override suspend fun updateUserDetailsById(id : Int) {
 
@@ -44,7 +38,6 @@ class UsersRepository @Inject constructor(
 
     }
 
-    override fun getUserDetailsRoom(id : Int) : Flow<UserDetailsEntity> {
-        return logicDataRoom.getUserDetails(id)
-    }
+    override fun getUserDetailsRoom(id : Int) : Flow<UserDetailsEntity>
+    = logicDataRoom.getUserDetails(id)
 }

@@ -1,8 +1,11 @@
 package com.example.githubusers.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity
 data class UserDetailsEntity(
     val login: String,
@@ -38,4 +41,4 @@ data class UserDetailsEntity(
     val following : Int?,
     val created_at : String?,
     val updated_at : String?
-)
+) : Parcelable

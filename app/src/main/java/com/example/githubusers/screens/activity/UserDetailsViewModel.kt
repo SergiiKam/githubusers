@@ -19,20 +19,7 @@ class UserDetailsViewModel @Inject constructor(
 
     var userId : Int = 0
 
-    fun getUserDetailsFromRoom() : Flow<UserDetailsEntity> {
-        Timber.d(userId.toString())
-
-        val flow = repository.getUserDetailsRoom(userId)
-
-        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-
-            flow.collectLatest {
-                Timber.d(it.toString())
-            }
-        }
-
-        return flow
-    }
+    fun getUserDetailsFromRoom() : Flow<UserDetailsEntity>  = repository.getUserDetailsRoom(userId)
 
     fun updateUserDetails() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {

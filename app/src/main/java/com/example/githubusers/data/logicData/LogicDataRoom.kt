@@ -7,32 +7,22 @@ import com.example.githubusers.model.UsersItemEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class LogicDataRoom @Inject constructor(var dao: UserDao) {
+class LogicDataRoom @Inject constructor(private val dao: UserDao) {
 
-    fun getAllUsers(): Flow<List<UsersItemEntity>> {
-
-        return dao.getAll()
-
-    }
+    fun getAllUsers(): Flow<List<UsersItemEntity>> = dao.getAll()
 
     fun insertUserList(userList : UserList) {
 
         userList.forEach { it ->
-
             dao.insert(it)
-
         }
     }
 
-    fun insertUserDetails(userDetailsEntity: UserDetailsEntity) {
-        dao.insertUserDetails(userDetailsEntity)
-    }
+    fun insertUserDetails(userDetailsEntity: UserDetailsEntity)
+    = dao.insertUserDetails(userDetailsEntity)
 
-    fun getUserDetails(id : Int) : Flow<UserDetailsEntity> {
-        return dao.getUserDetailInfo(id)
-    }
 
-    fun getUserById(id: Int) : UsersItemEntity {
-        return dao.getUserById(id)
-    }
+    fun getUserDetails(id : Int) : Flow<UserDetailsEntity> = dao.getUserDetailInfo(id)
+
+    fun getUserById(id: Int) : UsersItemEntity = dao.getUserById(id)
 }
