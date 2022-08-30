@@ -33,18 +33,19 @@ class RoomModule {
     }
 
     @Provides
-    fun provideRetrofit() : ApiService {
-        val retrofit by lazy {
-            Retrofit.Builder()
+    @Singleton
+    fun provideRetrofit() : Retrofit {
+
+        return Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-        }
+    }
 
-        val api : ApiService by lazy {
-            retrofit.create(ApiService::class.java)
-        }
+    @Provides
+    @Singleton
+    fun provideApi(retrofit : Retrofit) : ApiService {
 
-        return api
+        return retrofit.create(ApiService::class.java)
     }
 }
