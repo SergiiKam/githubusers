@@ -58,10 +58,6 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
     }
 
     private fun viewModelShowUserDetails() {
-        val user = arguments?.getParcelable<UsersItemEntity>("User")
-
-        Timber.d(user?.id.toString())
-
         viewModel.userId = arguments?.getInt("userId") as Int
         viewModel.updateUserDetails()
     }

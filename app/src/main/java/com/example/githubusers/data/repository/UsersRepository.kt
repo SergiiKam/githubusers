@@ -1,6 +1,6 @@
 package com.example.githubusers.data.repository
 
-import com.example.githubusers.data.api.RetrofitInstance
+import com.example.githubusers.data.api.ApiService
 import com.example.githubusers.data.logicData.LogicDataRoom
 import com.example.githubusers.model.UserDetailsEntity
 import com.example.githubusers.model.UserList
@@ -11,12 +11,13 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class UsersRepository @Inject constructor(
-    private val logicDataRoom : LogicDataRoom
+    private val logicDataRoom : LogicDataRoom,
+    private val api : ApiService
     ) : UsersRepositoryInterface  {
 
     override suspend fun updateListApi() {
 
-        val userList : UserList = RetrofitInstance.api.getListUsers()
+        val userList : UserList = api.getListUsers()
 
         logicDataRoom.insertUserList(userList)
     }
@@ -25,7 +26,7 @@ class UsersRepository @Inject constructor(
             = logicDataRoom.getAllUsers()
 
     override suspend fun getUserDetailApi(usersItemEntity: UsersItemEntity): UserDetailsEntity
-            = RetrofitInstance.api.getUserDetail(usersItemEntity.login!!)
+            = api.getUserDetail(usersItemEntity.login!!)
 
     override suspend fun updateUserDetailsById(id : Int) {
 
