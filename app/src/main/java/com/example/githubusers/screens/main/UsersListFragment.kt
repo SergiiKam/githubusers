@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.example.githubusers.R
-import com.example.githubusers.databinding.FragmentMainBinding
+import com.example.githubusers.databinding.FragmentUsersListBinding
 import com.example.githubusers.screens.activity.BaseFragment
 import com.example.githubusers.screens.activity.UserDetailsFragment
 import com.google.android.material.snackbar.Snackbar
@@ -16,7 +18,7 @@ import kotlinx.coroutines.flow.collectLatest
 import timber.log.Timber
 
 @AndroidEntryPoint
-class UsersListFragment : BaseFragment<FragmentMainBinding>() {
+class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
 
     private val viewModel : StartViewModel by viewModels()
 
@@ -25,9 +27,9 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
+        val view = inflater.inflate(R.layout.fragment_users_list, container, false)
 
-        setBinding(FragmentMainBinding.bind(view))
+        setBinding(FragmentUsersListBinding.bind(view))
 
         return getBinding().apply {
 
@@ -48,15 +50,13 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
         }.root
     }
 
-    private fun onAdapterClick(bundle : Bundle){
-        val userDetails : UserDetailsFragment = UserDetailsFragment()
-        userDetails.arguments = bundle
+    private fun onAdapterClick(id : Int){
 
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.frame_layout_main_activity, userDetails)
-            .addToBackStack(null)
-            .commit()
+        val action : NavDirections
+        = UsersListFragmentDirections.actionUsersListFragmentToUserDetailsFragment(id)
+
+        findNavController().navigate(action)
+
     }
 
 }

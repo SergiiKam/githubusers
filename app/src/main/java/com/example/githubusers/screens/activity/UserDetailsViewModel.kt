@@ -19,10 +19,12 @@ class UserDetailsViewModel @Inject constructor(
 
     var userId : Int = 0
 
-    fun getUserDetailsFromRoom() : Flow<UserDetailsEntity>  = repository.getUserDetailsRoom(userId)
+    fun getUserDetailsFromRoom() : Flow<UserDetailsEntity>
+        = repository.getUserDetailsRoom(userId)
 
     fun updateUserDetails() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+
             repository.updateUserDetailsById(userId)
         }
     }

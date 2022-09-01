@@ -17,7 +17,7 @@ data class UsersItemEntity(
     val html_url: String?,
     @PrimaryKey(autoGenerate = false)
     val id: Int,
-    val login: String?,
+    val login: String,
     val node_id: String?,
     val organizations_url: String?,
     val received_events_url: String?,
@@ -37,7 +37,7 @@ data class UsersItemEntity(
         parcel.readString(),
         parcel.readString(),
         parcel.readInt(),
-        parcel.readString(),
+        parcel.readString()!!,
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),

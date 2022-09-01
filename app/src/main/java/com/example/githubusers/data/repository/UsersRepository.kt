@@ -33,8 +33,6 @@ class UsersRepository @Inject constructor(
         val user = logicDataRoom.getUserById(id)
         val userDetailsEntity = getUserDetailApi(user)
 
-        Timber.d(userDetailsEntity.toString())
-
         logicDataRoom.insertUserDetails(userDetailsEntity)
 
     }
