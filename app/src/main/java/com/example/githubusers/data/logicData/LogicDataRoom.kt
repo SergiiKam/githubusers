@@ -11,16 +11,10 @@ class LogicDataRoom @Inject constructor(private val dao: UserDao) {
 
     fun getAllUsers(): Flow<List<UsersItemEntity>> = dao.getAll()
 
-    fun insertUserList(userList : UserList) {
-
-        userList.forEach { it ->
-            dao.insert(it)
-        }
-    }
+    fun insertUserList(userList : UserList) = dao.insertListUsersItemEntity(userList)
 
     fun insertUserDetails(userDetailsEntity: UserDetailsEntity)
     = dao.insertUserDetails(userDetailsEntity)
-
 
     fun getUserDetails(id : Int) : Flow<UserDetailsEntity> = dao.getUserDetailInfo(id)
 

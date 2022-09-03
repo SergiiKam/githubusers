@@ -17,86 +17,140 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/detailsName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="NAME"
-                android:textAlignment="center" />
+    <TextView
+        android:id="@+id/detailsName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/user_details_login"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/detailsEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsName" />
 
-            <TextView
-                android:id="@+id/detailsEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="test@gmail.com"
-                android:textAlignment="center" />
+    <TextView
+        android:id="@+id/detailsEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/user_details_email"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/detailsOrganization"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsName" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/detailsOrganization"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsEmail" />
 
-            <TextView
-                android:id="@+id/detailsOrganization"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Organization"
-                android:textAlignment="center" />
+    <TextView
+        android:id="@+id/detailsOrganization"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="1dp"
+        android:text="@string/user_details_organization"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/view3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsEmail" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/detailsFollowing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsOrganization" />
 
-            <TextView
-                android:id="@+id/detailsFollowing"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Following count"
-                android:textAlignment="center" />
+    <TextView
+        android:id="@+id/detailsFollowing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/user_details_following"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/detailsFollowers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsOrganization" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/detailsFollowers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsFollowing" />
 
-            <TextView
-                android:id="@+id/detailsFollowers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Followers count"
-                android:textAlignment="center" />
+    <TextView
+        android:id="@+id/detailsFollowers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/user_details_followers"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/detailsDateCreate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsFollowing" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/detailsDateCreate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsFollowers" />
 
-            <TextView
-                android:id="@+id/detailsDateCreate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:textAlignment="center" />
+    <TextView
+        android:id="@+id/detailsDateCreate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/user_details_date_creation"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsFollowers" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
-        </LinearLayout>
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsDateCreate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
