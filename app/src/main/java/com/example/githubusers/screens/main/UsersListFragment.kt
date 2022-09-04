@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentUsersListBinding
 import com.example.githubusers.screens.activity.BaseFragment
-import com.example.githubusers.screens.activity.UserDetailsFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -20,7 +19,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
 
-    private val viewModel : StartViewModel by viewModels()
+    private val viewModel: UsersListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,10 +49,10 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
         }.root
     }
 
-    private fun onAdapterClick(id : Int){
+    private fun onAdapterClick(id: Int) {
 
-        val action : NavDirections
-        = UsersListFragmentDirections.actionUsersListFragmentToUserDetailsFragment(id)
+        val action: NavDirections = UsersListFragmentDirections
+            .actionUsersListFragmentToUserDetailsFragment(id)
 
         findNavController().navigate(action)
 

@@ -38,7 +38,13 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
 }
+
+
 
 dependencies {
 
@@ -99,6 +105,7 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:${daggerVersion}")
     kapt("com.google.dagger:hilt-android-compiler:${daggerVersion}")
+    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
 
     implementation("androidx.navigation:navigation-fragment-ktx:${navigationVersion}")
     implementation("androidx.navigation:navigation-common-ktx:${navigationVersion}")

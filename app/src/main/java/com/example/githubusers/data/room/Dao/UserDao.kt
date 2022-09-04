@@ -34,5 +34,5 @@ interface UserDao {
     fun insertUserDetails(userDetailsEntity: UserDetailsEntity)
 
     @Query("select * from UserDetailsEntity where id = :id")
-    fun getUserDetailInfo(id: Int) : Flow<UserDetailsEntity>
+    fun getUserDetailInfo(id: Int) : Flow<UserDetailsEntity?>
 }

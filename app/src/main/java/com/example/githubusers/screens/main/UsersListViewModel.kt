@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class StartViewModel @Inject constructor(
+class UsersListViewModel @Inject constructor(
     private val repository: UsersRepositoryInterface
 ) : ViewModelBase() {
 

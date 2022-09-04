@@ -12,5 +12,6 @@
     <string name="user_details_organization">Organization : %1$s</string>
     <string name="user_details_following">Following : %1$s</string>
     <string name="user_details_followers">Followers : %1$s</string>
+    <string name="userimage">userImage</string>
 
 </resources>
