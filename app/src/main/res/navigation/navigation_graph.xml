@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/usersListFragment"
         android:name="com.example.githubusers.screens.main.UsersListFragment"
-        android:label="UsersListFragment" >
+        android:label="GitHub users:" >
         <action
             android:id="@+id/action_usersListFragment_to_userDetailsFragment"
             app:destination="@id/userDetailsFragment" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/userDetailsFragment"
         android:name="com.example.githubusers.screens.activity.UserDetailsFragment"
-        android:label="UserDetailsFragment" >
+        android:label="User info" >
         <argument
             android:name="userId"
             app:argType="integer" />
