@@ -13,7 +13,7 @@ data class UserDetailsEntity(
     val login: String,
     @PrimaryKey(autoGenerate = false)
     val id : Int,
-    @ColumnInfo()
+    @ColumnInfo(name = "node_id")
     val node_id : String?,
     @ColumnInfo()
     val avatar_url : String?,

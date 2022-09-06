@@ -1,14 +1,15 @@
-package com.example.githubusers.screens.main
+package com.example.githubusers.screens.main.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.example.githubusers.model.UsersItemEntity
-import com.example.githubusers.screens.main.adapter.ItemUserViewHolder
 
 
-class StartAdapter(var callBack: (Int) -> Unit) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(UserListDiffCallBack()) {
+class StartAdapter(var callBack: (Int) -> Unit) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(
+    UserListDiffCallBack()
+) {
 
     class ViewHold(parent: ViewGroup) : ItemUserViewHolder(parent)
 

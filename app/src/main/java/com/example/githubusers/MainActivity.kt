@@ -21,11 +21,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupActionBarWithNavController(findNavController(R.id.fragmentContainerView))
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragmentContainerView, UsersListFragment())
+            .commit()
+
+        //setupActionBarWithNavController(findNavController(R.id.fragmentContainerView))
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController : NavController = findNavController(R.id.fragmentContainerView)
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
+//    override fun onSupportNavigateUp(): Boolean {
+//        val navController : NavController = findNavController(R.id.fragmentContainerView)
+//        return navController.navigateUp() || super.onSupportNavigateUp()
+//    }
 }

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentUsersListBinding
 import com.example.githubusers.screens.activity.BaseFragment
+import com.example.githubusers.screens.main.adapter.StartAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -24,8 +25,7 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         val view = inflater.inflate(R.layout.fragment_users_list, container, false)
 
         setBinding(FragmentUsersListBinding.bind(view))
@@ -50,12 +50,10 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
     }
 
     private fun onAdapterClick(id: Int) {
-
         val action: NavDirections = UsersListFragmentDirections
             .actionUsersListFragmentToUserDetailsFragment(id)
 
         findNavController().navigate(action)
-
     }
 
 }

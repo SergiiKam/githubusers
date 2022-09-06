@@ -17,12 +17,14 @@ class UserDetailsViewModel @Inject constructor(
     private val savedState: SavedStateHandle
 ) : ViewModelBase() {
 
-    fun getUserDetailsFromRoom(): Flow<UserDetailsEntity> = repository.getUserDetailsRoom(savedState["userId"]!!)
+    private val args = UserDetailsFragmentArgs.fromSavedStateHandle(savedState)
+
+    fun getUserDetailsFromRoom(): Flow<UserDetailsEntity> = repository.getUserDetailsRoom(args.userId)
 
     fun updateUserDetails() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
-            repository.updateUserDetailsById(savedState["userId"]!!)
+            repository.updateUserDetailsById(args.userId)
 
         }
     }
