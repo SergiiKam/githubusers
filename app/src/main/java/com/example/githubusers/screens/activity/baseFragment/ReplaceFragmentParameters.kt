@@ -1,4 +1,4 @@
-package com.example.githubusers.screens.activity
+package com.example.githubusers.screens.activity.baseFragment
 
 import androidx.fragment.app.Fragment
 

@@ -1,15 +1,14 @@
-package com.example.githubusers.screens.activity
+package com.example.githubusers.screens.activity.baseFragment
 
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.example.githubusers.R
 
-open class BaseFragment <T: ViewBinding> : Fragment() {
+open class BaseFragment<T : ViewBinding> : Fragment() {
 
-    private var bind : T ?= null
+    private var bind: T? = null
 
     fun getBinding() = bind!!
-    fun setBinding(value : T) {
+    fun setBinding(value: T) {
         bind = value
     }
 
@@ -18,7 +17,7 @@ open class BaseFragment <T: ViewBinding> : Fragment() {
         bind = null
     }
 
-    fun replaceFragment(parameters:ReplaceFragmentParameters) {
+    fun replaceFragment(parameters: ReplaceFragmentParameters) {
         requireActivity().supportFragmentManager
             .beginTransaction()
             .replace(parameters.containerViewId, parameters.fragment)

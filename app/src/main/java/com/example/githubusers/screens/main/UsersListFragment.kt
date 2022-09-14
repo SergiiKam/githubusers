@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentMainBinding
-import com.example.githubusers.screens.activity.BaseFragment
-import com.example.githubusers.screens.activity.ReplaceFragmentParameters
+import com.example.githubusers.screens.activity.baseFragment.BaseFragment
+import com.example.githubusers.screens.activity.baseFragment.ReplaceFragmentParameters
 import com.example.githubusers.screens.activity.UserDetailsFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +24,7 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
@@ -50,7 +50,7 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
     }
 
     private fun onAdapterClick(bundle : Bundle){
-        val userDetails : UserDetailsFragment = UserDetailsFragment()
+        val userDetails = UserDetailsFragment()
         userDetails.arguments = bundle
 
         replaceFragment(ReplaceFragmentParameters(userDetails, R.id.frame_layout_main_activity))
