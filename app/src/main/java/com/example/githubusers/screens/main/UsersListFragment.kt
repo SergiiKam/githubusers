@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentMainBinding
 import com.example.githubusers.screens.activity.BaseFragment
+import com.example.githubusers.screens.activity.ReplaceFragmentParameters
 import com.example.githubusers.screens.activity.UserDetailsFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,11 +53,7 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
         val userDetails : UserDetailsFragment = UserDetailsFragment()
         userDetails.arguments = bundle
 
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.frame_layout_main_activity, userDetails)
-            .addToBackStack(null)
-            .commit()
+        replaceFragment(ReplaceFragmentParameters(userDetails, R.id.frame_layout_main_activity))
     }
 
 }

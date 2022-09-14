@@ -41,16 +41,16 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.getUserDetailsFromRoom().collectLatest {
 
-                detailsEmail.text        = String.format(view?.resources?.getString(R.string.user_details_email)!!, it?.email?.toString())
-                detailsDateCreate.text   = String.format(view?.resources?.getString(R.string.user_details_date_creation)!!, it?.created_at?.toString())
-                detailsName.text         = String.format(view?.resources?.getString(R.string.user_details_login)!!, it?.name?.toString())
-                detailsOrganization.text = String.format(view?.resources?.getString(R.string.user_details_organization)!!, it?.company?.toString())
-                detailsFollowing.text    = String.format(view?.resources?.getString(R.string.user_details_following)!!, it?.following.toString())
-                detailsFollowers.text    = String.format(view?.resources?.getString(R.string.user_details_followers)!!,  it?.followers?.toString())
+                detailsEmail.text        = String.format(view?.resources?.getString(R.string.user_details_email)!!, it.email)
+                detailsDateCreate.text   = String.format(view?.resources?.getString(R.string.user_details_date_creation)!!, it.created_at)
+                detailsName.text         = String.format(view?.resources?.getString(R.string.user_details_login)!!, it.name)
+                detailsOrganization.text = String.format(view?.resources?.getString(R.string.user_details_organization)!!, it.company)
+                detailsFollowing.text    = String.format(view?.resources?.getString(R.string.user_details_following)!!, it.following.toString())
+                detailsFollowers.text    = String.format(view?.resources?.getString(R.string.user_details_followers)!!,  it.followers)
 
                 Glide
                     .with(root.context)
-                    .load(it?.avatar_url?.toString())
+                    .load(it.avatar_url)
                     .centerCrop()
                     .into(getBinding().image)
             }

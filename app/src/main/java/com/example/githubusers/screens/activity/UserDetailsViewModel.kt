@@ -7,9 +7,8 @@ import com.example.githubusers.screens.ViewModelBase.ViewModelBase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,9 +16,10 @@ class UserDetailsViewModel @Inject constructor(
     private val repository: UsersRepositoryInterface
 ) : ViewModelBase() {
 
-    var userId : Int = 0
+    var userId: Int = 0
 
-    fun getUserDetailsFromRoom() : Flow<UserDetailsEntity>  = repository.getUserDetailsRoom(userId)
+    fun getUserDetailsFromRoom(): Flow<UserDetailsEntity> =
+        repository.getUserDetailsRoom(userId).filterNotNull()
 
     fun updateUserDetails() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
