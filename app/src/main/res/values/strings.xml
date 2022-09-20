@@ -6,12 +6,12 @@
     <string name="user">user</string>
     <string name="id">id</string>
     <string name="html_url">html URL</string>
-    <string name="user_details_email">Email : %1$s</string>
-    <string name="user_details_login">Login : %1$s</string>
-    <string name="user_details_date_creation">Creation date : %1$s</string>
-    <string name="user_details_organization">Organization : %1$s</string>
-    <string name="user_details_following">Following : %1$s</string>
-    <string name="user_details_followers">Followers : %1$s</string>
+    <string name="user_details_email">Email: %1$s</string>
+    <string name="user_details_login">Name: %1$s</string>
+    <string name="user_details_date_creation">Creation date: %1$s</string>
+    <string name="user_details_organization">Organization: %1$s</string>
+    <string name="user_details_following">Following: %1$s</string>
+    <string name="user_details_followers">Followers: %1$s</string>
     <string name="userimage">userImage</string>
 
 </resources>

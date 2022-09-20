@@ -32,7 +32,7 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
 
         return getBinding().apply {
 
-            val adapter = StartAdapter(::onAdapterClick)
+            val adapter = StartAdapter(::onUserClicked)
             recView.adapter = adapter
 
             Timber.d("onCreateView")
@@ -49,7 +49,7 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
         }.root
     }
 
-    private fun onAdapterClick(id: Int) {
+    private fun onUserClicked(id: Int) {
         val action: NavDirections = UsersListFragmentDirections
             .actionUsersListFragmentToUserDetailsFragment(id)
 

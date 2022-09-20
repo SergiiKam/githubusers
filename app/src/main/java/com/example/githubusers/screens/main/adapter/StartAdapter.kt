@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.githubusers.model.UsersItemEntity
 
 
-class StartAdapter(var callBack: (Int) -> Unit) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(
+class StartAdapter(val callBack: (Int) -> Unit) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(
     UserListDiffCallBack()
 ) {
 

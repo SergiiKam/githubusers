@@ -15,62 +15,62 @@ data class UserDetailsEntity(
     val id : Int,
     @ColumnInfo(name = "node_id")
     val node_id : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "avatar_url")
     val avatar_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "gravatar_id")
     val gravatar_id : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "url")
     val url: String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "html_url")
     val html_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "followers_url")
     val followers_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "following_url")
     val following_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "gists_url")
     val gists_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "starred_url")
     val starred_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "subscriptions_url")
     val subscriptions_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "organizations_url")
     val organizations_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "repos_url")
     val repos_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "events_url")
     val events_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "received_events_url")
     val received_events_url : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "type")
     val type : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "site_admin")
     val site_admin: Boolean?,
-    @ColumnInfo()
+    @ColumnInfo(name = "name")
     val name: String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "company")
     val company: String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "blog")
     val blog : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "location")
     val location : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "email")
     val email : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "hireable")
     val hireable : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "bio")
     val bio : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "twitter_username")
     val twitter_username : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "public_repos")
     val public_repos : Int?,
-    @ColumnInfo()
+    @ColumnInfo(name = "public_gists")
     val public_gists : Int?,
-    @ColumnInfo()
+    @ColumnInfo(name = "followers")
     val followers : Int?,
-    @ColumnInfo()
+    @ColumnInfo(name = "following")
     val following : Int?,
-    @ColumnInfo()
+    @ColumnInfo(name = "created_at")
     val created_at : String?,
-    @ColumnInfo()
+    @ColumnInfo(name = "updated_at")
     val updated_at : String?
 ) : Parcelable
