@@ -10,7 +10,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentUsersListBinding
-import com.example.githubusers.screens.activity.BaseFragment
+import com.example.githubusers.screens.activity.baseFragment.BaseFragment
 import com.example.githubusers.screens.main.adapter.StartAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
