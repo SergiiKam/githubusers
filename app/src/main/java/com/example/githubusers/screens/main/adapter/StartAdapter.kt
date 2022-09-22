@@ -1,24 +1,15 @@
-package com.example.githubusers.screens.main
+package com.example.githubusers.screens.main.adapter
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.githubusers.R
-import com.example.githubusers.databinding.ItemUserLayoutBinding
 import com.example.githubusers.model.UsersItemEntity
 
 
-abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerView.ViewHolder(binding.root) {
-    constructor(parent: ViewGroup) : this(
-        ItemUserLayoutBinding.bind(LayoutInflater.from(parent.context).inflate(R.layout.item_user_layout, parent, false))
-    )
-}
-
-class StartAdapter(var callBack: (Bundle) -> Unit) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(UserListDiffCallBack()) {
+class StartAdapter(val callBack: (Int) -> Unit) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(
+    UserListDiffCallBack()
+) {
 
     class ViewHold(parent: ViewGroup) : ItemUserViewHolder(parent)
 
@@ -49,11 +40,7 @@ class StartAdapter(var callBack: (Bundle) -> Unit) : ListAdapter<UsersItemEntity
 
     private fun linearLayoutOnclickId(position: Int) {
 
-        val bundle = Bundle()
-
-        bundle.putInt("userId", getItem(position).id)
-
-        callBack(bundle)
+        callBack(getItem(position).id)
     }
 
     class UserListDiffCallBack : DiffUtil.ItemCallback<UsersItemEntity>() {

@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.githubusers.R
 import com.example.githubusers.databinding.FragmentUserDetailsBinding
-import com.example.githubusers.screens.activity.baseFragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -39,28 +38,28 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
             viewModel.getUserDetailsFromRoom().collectLatest {
 
                 detailsEmail.text = String.format(
-                    view?.resources?.getString(R.string.user_details_email)!!,
+                    view.resources.getString(R.string.user_details_email),
                     it.email
                 )
                 detailsDateCreate.text = String.format(
-                    view?.resources?.getString(R.string.user_details_date_creation)!!,
+                    requireContext().getString(R.string.user_details_date_creation),
                     it.created_at
                 )
                 detailsName.text = String.format(
-                    view?.resources?.getString(R.string.user_details_login)!!,
+                    view.resources.getString(R.string.user_details_login),
                     it.name
                 )
                 detailsOrganization.text = String.format(
-                    view?.resources?.getString(R.string.user_details_organization)!!,
+                    view.resources.getString(R.string.user_details_organization),
                     it.company
                 )
                 detailsFollowing.text = String.format(
-                    view?.resources?.getString(R.string.user_details_following)!!,
+                    view.resources.getString(R.string.user_details_following),
                     it.following.toString()
                 )
                 detailsFollowers.text = String.format(
-                    view?.resources?.getString(R.string.user_details_followers)!!,
-                    it.followers
+                    view.resources.getString(R.string.user_details_followers),
+                    it.followers?.toString()
                 )
 
                 Glide
@@ -73,7 +72,6 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
     }
 
     private fun viewModelShowUserDetails() {
-        viewModel.userId = arguments?.getInt("userId") as Int
         viewModel.updateUserDetails()
     }
 }

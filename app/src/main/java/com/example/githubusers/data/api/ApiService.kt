@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("users?")
+    @GET("users")
     suspend fun getListUsers(@Query("per_page") per_page : Int = 100): UserList
 
     @GET("users/{username}")

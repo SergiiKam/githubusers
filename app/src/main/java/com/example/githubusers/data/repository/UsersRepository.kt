@@ -26,14 +26,12 @@ class UsersRepository @Inject constructor(
             = logicDataRoom.getAllUsers()
 
     override suspend fun getUserDetailApi(usersItemEntity: UsersItemEntity): UserDetailsEntity
-            = api.getUserDetail(usersItemEntity.login!!)
+            = api.getUserDetail(usersItemEntity.login)
 
     override suspend fun updateUserDetailsById(id : Int) {
 
         val user = logicDataRoom.getUserById(id)
         val userDetailsEntity = getUserDetailApi(user)
-
-        Timber.d(userDetailsEntity.toString())
 
         logicDataRoom.insertUserDetails(userDetailsEntity)
 
