@@ -32,7 +32,7 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
 
         return getBinding().apply {
 
-            val adapter = StartAdapter(::onAdapterClick)
+            val adapter = StartAdapter(::onAdapterClick, ::updateUsersList)
             recView.adapter = adapter
 
             Timber.d("onCreateView")
@@ -54,6 +54,10 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
         userDetails.arguments = bundle
 
         replaceFragment(ReplaceFragmentParameters(userDetails, R.id.frame_layout_main_activity))
+    }
+
+    private fun updateUsersList() {
+        viewModel.updateUsersList()
     }
 
 }

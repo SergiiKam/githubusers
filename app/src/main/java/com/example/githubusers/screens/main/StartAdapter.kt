@@ -18,7 +18,7 @@ abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerV
     )
 }
 
-class StartAdapter(var callBack: (Bundle) -> Unit) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(UserListDiffCallBack()) {
+class StartAdapter(val callBack: (Bundle) -> Unit, val UpdateList: () -> Unit ) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(UserListDiffCallBack()) {
 
     class ViewHold(parent: ViewGroup) : ItemUserViewHolder(parent)
 
@@ -27,6 +27,10 @@ class StartAdapter(var callBack: (Bundle) -> Unit) : ListAdapter<UsersItemEntity
     }
 
     override fun onBindViewHolder(holder: ViewHold, position: Int) {
+
+        if (position >= itemCount-15) {
+            UpdateList()
+        }
 
         holder.binding.apply {
 

@@ -12,11 +12,17 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(usersItem: UsersItemEntity)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertList(list: List<UsersItemEntity>)
+
     @Update
     fun update(usersItem: UsersItemEntity)
 
     @Delete
     fun delete(usersItem: UsersItemEntity)
+
+    @Query("select MAX(id) from UsersItemEntity")
+    fun getMaxById() : Int
 
     @Query("select * from UsersItemEntity")
     fun getAll() : Flow<List<UsersItemEntity>>

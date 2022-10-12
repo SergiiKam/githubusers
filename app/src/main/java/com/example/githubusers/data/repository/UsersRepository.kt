@@ -1,5 +1,6 @@
 package com.example.githubusers.data.repository
 
+import android.util.Log
 import com.example.githubusers.data.api.ApiService
 import com.example.githubusers.data.logicData.LogicDataRoom
 import com.example.githubusers.model.UserDetailsEntity
@@ -17,9 +18,10 @@ class UsersRepository @Inject constructor(
 
     override suspend fun updateListApi() {
 
-        val userList : UserList = api.getListUsers()
+        val userList : UserList = api.getListUsers(since = logicDataRoom.getMaxById())
 
         logicDataRoom.insertUserList(userList)
+
     }
 
     override fun getAllUsers(): Flow<List<UsersItemEntity>>
@@ -41,4 +43,5 @@ class UsersRepository @Inject constructor(
 
     override fun getUserDetailsRoom(id : Int) : Flow<UserDetailsEntity>
     = logicDataRoom.getUserDetails(id)
+
 }

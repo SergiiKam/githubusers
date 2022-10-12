@@ -17,9 +17,11 @@ class StartViewModel @Inject constructor(
 ) : ViewModelBase() {
 
     init {
-        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            repository.updateListApi()
-        }
+        updateUsersList()
+    }
+
+    fun updateUsersList() {
+        viewModelScope.launch(Dispatchers.IO) { repository.updateListApi() }
     }
 
     fun getUsers(): Flow<List<UsersItemEntity>> = repository.getAllUsers()

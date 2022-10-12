@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("users?")
-    suspend fun getListUsers(@Query("per_page") per_page : Int = 100): UserList
+    suspend fun getListUsers(@Query("per_page") per_page : Int = 100, @Query("since") since : Int = 0): UserList
 
     @GET("users/{username}")
     suspend fun getUserDetail(@Path("username") name: String) : UserDetailsEntity
