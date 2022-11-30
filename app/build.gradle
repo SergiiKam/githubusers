@@ -64,6 +64,8 @@ dependencies {
         timberVersion = '5.0.1'
         fragmentKtxVersion = '1.5.2'
 
+        paging_version = "3.1.1"
+
     }
 
     implementation "androidx.core:core-ktx:${coreVersion}"
@@ -104,4 +106,6 @@ dependencies {
 
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation("androidx.fragment:fragment-ktx:${fragmentKtxVersion}")
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
 }

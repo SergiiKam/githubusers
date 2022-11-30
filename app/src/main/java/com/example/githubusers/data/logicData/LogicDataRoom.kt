@@ -19,5 +19,5 @@ class LogicDataRoom @Inject constructor(private val dao: UserDao) {
 
     fun getUserById(id: Int) : UsersItemEntity = dao.getUserById(id)
 
-    fun getMaxById() : Int = dao.getMaxById()
+    fun getUsersList(minId : Int, count : Int) : List<UsersItemEntity> = dao.getUserList(minId, count)
 }

@@ -32,15 +32,16 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
 
         return getBinding().apply {
 
-            val adapter = StartAdapter(::onAdapterClick, ::updateUsersList)
+            val adapter = StartAdapter(::onAdapterClick)
             recView.adapter = adapter
+
+            //recView.addOnScrollListener()
 
             Timber.d("onCreateView")
 
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                viewModel.getUsers().collectLatest {
-                    adapter.submitList(it)
-                }
+
+                viewModel.flow.collectLatest(adapter::submitData)
 
                 viewModel.misStateFlow.collectLatest {
                     Snackbar.make(getBinding().root, it, Snackbar.LENGTH_LONG).show()
@@ -54,10 +55,6 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
         userDetails.arguments = bundle
 
         replaceFragment(ReplaceFragmentParameters(userDetails, R.id.frame_layout_main_activity))
-    }
-
-    private fun updateUsersList() {
-        viewModel.updateUsersList()
     }
 
 }

@@ -3,8 +3,8 @@ package com.example.githubusers.screens.main
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubusers.R
@@ -18,7 +18,7 @@ abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerV
     )
 }
 
-class StartAdapter(val callBack: (Bundle) -> Unit, val UpdateList: () -> Unit ) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(UserListDiffCallBack()) {
+class StartAdapter(val callBack: (Bundle) -> Unit) : PagingDataAdapter<UsersItemEntity, StartAdapter.ViewHold>(UserListDiffCallBack()) {
 
     class ViewHold(parent: ViewGroup) : ItemUserViewHolder(parent)
 
@@ -28,13 +28,9 @@ class StartAdapter(val callBack: (Bundle) -> Unit, val UpdateList: () -> Unit ) 
 
     override fun onBindViewHolder(holder: ViewHold, position: Int) {
 
-        if (position >= itemCount-15) {
-            UpdateList()
-        }
-
         holder.binding.apply {
 
-            val item = getItem(position)
+            val item = getItem(position) ?: return
 
             userName.text = item.login
             userId.text = item.id.toString()
@@ -55,7 +51,7 @@ class StartAdapter(val callBack: (Bundle) -> Unit, val UpdateList: () -> Unit ) 
 
         val bundle = Bundle()
 
-        bundle.putInt("userId", getItem(position).id)
+        bundle.putInt("userId", getItem(position)!!.id)
 
         callBack(bundle)
     }

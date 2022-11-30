@@ -22,7 +22,7 @@ interface UserDao {
     fun delete(usersItem: UsersItemEntity)
 
     @Query("select MAX(id) from UsersItemEntity")
-    fun getMaxById() : Int
+    fun getMaxId() : Int
 
     @Query("select * from UsersItemEntity")
     fun getAll() : Flow<List<UsersItemEntity>>
@@ -38,4 +38,7 @@ interface UserDao {
 
     @Query("select * from UserDetailsEntity where id = :id")
     fun getUserDetailInfo(id: Int) : Flow<UserDetailsEntity>
+
+    @Query("select * from UsersItemEntity where id >= :minId limit :count")
+    fun  getUserList(minId: Int, count:Int) : List<UsersItemEntity>
 }
