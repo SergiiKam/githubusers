@@ -35,8 +35,6 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
             val adapter = StartAdapter(::onAdapterClick)
             recView.adapter = adapter
 
-            //recView.addOnScrollListener()
-
             Timber.d("onCreateView")
 
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {

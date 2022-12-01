@@ -52,13 +52,6 @@ class Source @Inject constructor(
         else
             null
 
-        Timber.d("----")
-        Timber.d("prevKeyPage: $prevKeyPage")
-        Timber.d("nextKeyPage: $nextKeyPage")
-        Timber.d("params.key: ${params.key}")
-        Timber.d("userList.size: ${userList!!.size}")
-        Timber.d("----")
-
         return LoadResult.Page(userList!!, prevKeyPage, nextKeyPage)
     }
 
