@@ -51,7 +51,7 @@ class StartAdapter(val callBack: (Bundle) -> Unit) : PagingDataAdapter<UsersItem
 
         val bundle = Bundle()
 
-        bundle.putInt("userId", getItem(position)!!.id)
+        bundle.putInt("userId", requireNotNull(getItem(position)).id)
 
         callBack(bundle)
     }
