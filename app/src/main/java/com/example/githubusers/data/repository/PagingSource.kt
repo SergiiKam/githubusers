@@ -10,9 +10,9 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
-class Source @Inject constructor(
+class PagingSource @Inject constructor(
     private val logicDataRoom : LogicDataRoom,
-    private val api : ApiService
+    private val retrofitApiService : ApiService
 ): PagingSource<Int, UsersItemEntity>() {
 
     override fun getRefreshKey(state: PagingState<Int, UsersItemEntity>): Int {
@@ -26,33 +26,28 @@ class Source @Inject constructor(
 
         val perPage = params.loadSize
 
-        var userList: List<UsersItemEntity>?
+        var userList: List<UsersItemEntity>
 
         withContext(Dispatchers.IO) {
 
             userList = logicDataRoom.getUsersList(params.key ?: 1, perPage)
 
-            if (userList!!.size < perPage) {
-                val usersPage = api.getListUsers(perPage, params.key ?: 1)
+            if (userList.size < perPage) {
+                val usersPage = retrofitApiService.getListUsers(perPage, params.key ?: 1)
                 logicDataRoom.insertUserList(usersPage)
 
                 userList = logicDataRoom.getUsersList(params.key ?: 1, perPage)
             }
         }
 
-        val prevKeyPage: Int? =
-            if (params.key == 0) {
-                null
-            } else {
-                params.key
-            }
+        val prevKeyPage: Int? = if (params.key == 0 || params.key == null) null else params.key
 
-        val nextKeyPage: Int? = if (userList!!.isNotEmpty())
-            userList!!.last().id + 1
+        val nextKeyPage: Int? = if (userList.isNotEmpty())
+            userList.last().id + 1
         else
             null
 
-        return LoadResult.Page(userList!!, prevKeyPage, nextKeyPage)
+        return LoadResult.Page(userList, prevKeyPage, nextKeyPage)
     }
 
 }

@@ -39,7 +39,7 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
 
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 
-                viewModel.flow.collectLatest(adapter::submitData)
+                viewModel.getRepositoryFlow().collectLatest(adapter::submitData)
 
                 viewModel.misStateFlow.collectLatest {
                     Snackbar.make(getBinding().root, it, Snackbar.LENGTH_LONG).show()

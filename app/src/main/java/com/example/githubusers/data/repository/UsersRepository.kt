@@ -1,5 +1,8 @@
 package com.example.githubusers.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.example.githubusers.data.api.ApiService
 import com.example.githubusers.data.logicData.LogicDataRoom
 import com.example.githubusers.model.UserDetailsEntity
@@ -11,8 +14,17 @@ import javax.inject.Inject
 
 class UsersRepository @Inject constructor(
     private val logicDataRoom: LogicDataRoom,
-    private val api: ApiService
+    private val api: ApiService,
+    private val pagingSource : PagingSource
 ) : UsersRepositoryInterface {
+
+    private val flow: Flow<PagingData<UsersItemEntity>> = Pager(
+        PagingConfig(pageSize = 40), initialKey = 0
+    ) {
+        pagingSource
+    }.flow
+
+    override fun getPagingFlow() : Flow<PagingData<UsersItemEntity>> = flow
 
     override suspend fun updateListApi() {
 
