@@ -40,14 +40,13 @@ class PagingSource @Inject constructor(
             }
         }
 
-        val prevKeyPage: Int? = if (params.key == 0 || params.key == null) null else params.key
-
-        val nextKeyPage: Int? = if (userList.isNotEmpty())
-            userList.last().id + 1
-        else
-            null
-
-        return LoadResult.Page(userList, prevKeyPage, nextKeyPage)
+        return LoadResult.Page(
+            userList,
+            params.key,
+            if (userList.isNotEmpty())
+                userList.last().id + 1
+            else null
+        )
     }
 
 }
