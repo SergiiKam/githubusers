@@ -2,17 +2,17 @@ package com.example.githubusers.data.repository
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.githubusers.data.api.ApiService
-import com.example.githubusers.data.logicData.LogicDataRoom
+import com.example.githubusers.data.api.UsersApi
+import com.example.githubusers.data.logicData.UsersDao
 import com.example.githubusers.model.UsersItemEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
-class PagingSource @Inject constructor(
-    private val logicDataRoom : LogicDataRoom,
-    private val retrofitApiService : ApiService
+class UsersPagingSource @Inject constructor(
+    private val usersDao : UsersDao,
+    private val retrofitApiService : UsersApi
 ): PagingSource<Int, UsersItemEntity>() {
 
     override fun getRefreshKey(state: PagingState<Int, UsersItemEntity>): Int {
@@ -30,13 +30,13 @@ class PagingSource @Inject constructor(
 
         withContext(Dispatchers.IO) {
 
-            userList = logicDataRoom.getUsersList(params.key ?: 1, perPage)
+            userList = usersDao.getUsersList(params.key,perPage)
 
             if (userList.size < perPage) {
                 val usersPage = retrofitApiService.getListUsers(perPage, params.key ?: 1)
-                logicDataRoom.insertUserList(usersPage)
+                usersDao.insertUserList(usersPage)
 
-                userList = logicDataRoom.getUsersList(params.key ?: 1, perPage)
+                userList = usersDao.getUsersList(params.key ?: 1, perPage)
             }
         }
 

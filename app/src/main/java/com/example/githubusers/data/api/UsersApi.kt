@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiService {
+interface UsersApi {
 
     @GET("users?")
     suspend fun getListUsers(@Query("per_page") per_page : Int = 100, @Query("since") since : Int = 0): UserList

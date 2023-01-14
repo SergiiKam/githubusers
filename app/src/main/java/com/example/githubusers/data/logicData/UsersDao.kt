@@ -7,7 +7,7 @@ import com.example.githubusers.model.UsersItemEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class LogicDataRoom @Inject constructor(private val dao: UserDao) {
+class UsersDao @Inject constructor(private val dao: UserDao) {
 
     fun getAllUsers(): Flow<List<UsersItemEntity>> = dao.getAll()
 
@@ -19,5 +19,10 @@ class LogicDataRoom @Inject constructor(private val dao: UserDao) {
 
     fun getUserById(id: Int) : UsersItemEntity = dao.getUserById(id)
 
-    fun getUsersList(minId : Int, count : Int) : List<UsersItemEntity> = dao.getUserList(minId, count)
+    fun getUsersList(minId : Int = 0, count : Int) : List<UsersItemEntity> = dao.getUserList(minId, count)
+
+    fun getUsersList(minId: Int?, count : Int) : List<UsersItemEntity> {
+        return if (minId == null) getUsersList(count = count)
+        else getUsersList(minId, count)
+    }
 }

@@ -18,7 +18,7 @@ abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerV
     )
 }
 
-class StartAdapter(val onAdapterClickFun: (Bundle) -> Unit) : PagingDataAdapter<UsersItemEntity, StartAdapter.ViewHold>(UserListDiffCallBack()) {
+class UsersAdapter(val onAdapterClick: (Bundle) -> Unit) : PagingDataAdapter<UsersItemEntity, UsersAdapter.ViewHold>(UserListDiffCallBack()) {
 
     class ViewHold(parent: ViewGroup) : ItemUserViewHolder(parent)
 
@@ -53,7 +53,7 @@ class StartAdapter(val onAdapterClickFun: (Bundle) -> Unit) : PagingDataAdapter<
 
         bundle.putInt("userId", requireNotNull(getItem(position)).id)
 
-        onAdapterClickFun(bundle)
+        onAdapterClick(bundle)
     }
 
     class UserListDiffCallBack : DiffUtil.ItemCallback<UsersItemEntity>() {

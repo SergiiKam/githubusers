@@ -32,7 +32,7 @@ class UsersListFragment : BaseFragment<FragmentMainBinding>() {
 
         return getBinding().apply {
 
-            val adapter = StartAdapter(::onAdapterClick)
+            val adapter = UsersAdapter(::onAdapterClick)
             recView.adapter = adapter
 
             Timber.d("onCreateView")

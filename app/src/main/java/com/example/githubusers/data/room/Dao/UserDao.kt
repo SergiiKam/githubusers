@@ -40,5 +40,5 @@ interface UserDao {
     fun getUserDetailInfo(id: Int) : Flow<UserDetailsEntity>
 
     @Query("select * from UsersItemEntity where id >= :minId limit :count")
-    fun  getUserList(minId: Int, count:Int) : List<UsersItemEntity>
+    fun  getUserList(minId: Int = 0, count:Int) : List<UsersItemEntity>
 }
