@@ -1,15 +1,24 @@
-package com.example.githubusers.screens.main.adapter
+package com.example.githubusers.screens.main
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.githubusers.R
+import com.example.githubusers.databinding.ItemUserLayoutBinding
 import com.example.githubusers.model.UsersItemEntity
 
 
-class StartAdapter(val callBack: (Int) -> Unit) : ListAdapter<UsersItemEntity, StartAdapter.ViewHold>(
-    UserListDiffCallBack()
-) {
+abstract class ItemUserViewHolder(val binding: ItemUserLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+    constructor(parent: ViewGroup) : this(
+        ItemUserLayoutBinding.bind(LayoutInflater.from(parent.context).inflate(R.layout.item_user_layout, parent, false))
+    )
+}
+
+class UsersAdapter(val onAdapterClick: (Bundle) -> Unit) : PagingDataAdapter<UsersItemEntity, UsersAdapter.ViewHold>(UserListDiffCallBack()) {
 
     class ViewHold(parent: ViewGroup) : ItemUserViewHolder(parent)
 
@@ -21,7 +30,7 @@ class StartAdapter(val callBack: (Int) -> Unit) : ListAdapter<UsersItemEntity, S
 
         holder.binding.apply {
 
-            val item = getItem(position)
+            val item = getItem(position) ?: return
 
             userName.text = item.login
             userId.text = item.id.toString()
@@ -40,7 +49,11 @@ class StartAdapter(val callBack: (Int) -> Unit) : ListAdapter<UsersItemEntity, S
 
     private fun linearLayoutOnclickId(position: Int) {
 
-        callBack(getItem(position).id)
+        val bundle = Bundle()
+
+        bundle.putInt("userId", requireNotNull(getItem(position)).id)
+
+        onAdapterClick(bundle)
     }
 
     class UserListDiffCallBack : DiffUtil.ItemCallback<UsersItemEntity>() {

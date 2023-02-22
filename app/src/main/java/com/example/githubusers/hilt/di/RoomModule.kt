@@ -2,11 +2,9 @@ package com.example.githubusers.hilt.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.githubusers.data.api.ApiService
-import com.example.githubusers.data.logicData.LogicDataRoom
+import com.example.githubusers.data.api.UsersApi
 import com.example.githubusers.data.room.Dao.UserDao
 import com.example.githubusers.data.room.Dbase
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,8 +42,8 @@ class RoomModule {
 
     @Provides
     @Singleton
-    fun provideApi(retrofit : Retrofit) : ApiService {
+    fun provideApi(retrofit : Retrofit) : UsersApi {
 
-        return retrofit.create(ApiService::class.java)
+        return retrofit.create(UsersApi::class.java)
     }
 }

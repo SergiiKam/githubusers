@@ -4,8 +4,6 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
-
-    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -38,13 +36,7 @@ android {
     buildFeatures {
         viewBinding true
     }
-
-    kapt {
-        correctErrorTypes = true
-    }
 }
-
-
 
 dependencies {
 
@@ -71,6 +63,8 @@ dependencies {
 
         timberVersion = '5.0.1'
         fragmentKtxVersion = '1.5.2'
+
+        paging_version = "3.1.1"
 
     }
 
@@ -105,13 +99,13 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:${daggerVersion}")
     kapt("com.google.dagger:hilt-android-compiler:${daggerVersion}")
-    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:${navigationVersion}")
     implementation("androidx.navigation:navigation-common-ktx:${navigationVersion}")
     implementation("androidx.navigation:navigation-ui-ktx:${navigationVersion}")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:${navigationVersion}")
 
     implementation "com.jakewharton.timber:timber:${timberVersion}"
     implementation("androidx.fragment:fragment-ktx:${fragmentKtxVersion}")
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
 }

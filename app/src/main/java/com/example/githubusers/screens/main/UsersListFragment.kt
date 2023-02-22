@@ -6,41 +6,40 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDirections
-import androidx.navigation.fragment.findNavController
 import com.example.githubusers.R
-import com.example.githubusers.databinding.FragmentUsersListBinding
+import com.example.githubusers.databinding.FragmentMainBinding
 import com.example.githubusers.screens.activity.baseFragment.BaseFragment
-import com.example.githubusers.screens.main.adapter.StartAdapter
+import com.example.githubusers.screens.activity.baseFragment.ReplaceFragmentParameters
+import com.example.githubusers.screens.activity.UserDetailsFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import timber.log.Timber
 
 @AndroidEntryPoint
-class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
+class UsersListFragment : BaseFragment<FragmentMainBinding>() {
 
-    private val viewModel: UsersListViewModel by viewModels()
+    private val viewModel : StartViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_users_list, container, false)
 
-        setBinding(FragmentUsersListBinding.bind(view))
+        val view = inflater.inflate(R.layout.fragment_main, container, false)
+
+        setBinding(FragmentMainBinding.bind(view))
 
         return getBinding().apply {
 
-            val adapter = StartAdapter(::onUserClicked)
+            val adapter = UsersAdapter(::onAdapterClick)
             recView.adapter = adapter
 
             Timber.d("onCreateView")
 
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                viewModel.getUsers().collectLatest {
-                    adapter.submitList(it)
-                }
+
+                viewModel.getRepositoryFlow().collectLatest(adapter::submitData)
 
                 viewModel.misStateFlow.collectLatest {
                     Snackbar.make(getBinding().root, it, Snackbar.LENGTH_LONG).show()
@@ -49,11 +48,11 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
         }.root
     }
 
-    private fun onUserClicked(id: Int) {
-        val action: NavDirections = UsersListFragmentDirections
-            .actionUsersListFragmentToUserDetailsFragment(id)
+    private fun onAdapterClick(bundle : Bundle){
+        val userDetails = UserDetailsFragment()
+        userDetails.arguments = bundle
 
-        findNavController().navigate(action)
+        replaceFragment(ReplaceFragmentParameters(userDetails, R.id.frame_layout_main_activity))
     }
 
 }
