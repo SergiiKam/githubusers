@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.githubusers.R
-import com.example.githubusers.databinding.FragmentMainBinding
+import com.example.githubusers.databinding.FragmentUsersListBinding
 import com.example.githubusers.screens.activity.baseFragment.BaseFragment
 import com.example.githubusers.screens.activity.baseFragment.ReplaceFragmentParameters
 import com.example.githubusers.screens.activity.UserDetailsFragment
@@ -17,18 +17,18 @@ import kotlinx.coroutines.flow.collectLatest
 import timber.log.Timber
 
 @AndroidEntryPoint
-class UsersListFragment : BaseFragment<FragmentMainBinding>() {
+class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
 
-    private val viewModel : StartViewModel by viewModels()
+    private val viewModel : UsersListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
+        val view = inflater.inflate(R.layout.fragment_users_list, container, false)
 
-        setBinding(FragmentMainBinding.bind(view))
+        setBinding(FragmentUsersListBinding.bind(view))
 
         return getBinding().apply {
 
