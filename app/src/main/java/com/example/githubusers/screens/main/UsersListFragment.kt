@@ -52,7 +52,7 @@ class UsersListFragment : BaseFragment<FragmentUsersListBinding>() {
         val userDetails = UserDetailsFragment()
         userDetails.arguments = bundle
 
-        replaceFragment(ReplaceFragmentParameters(userDetails, R.id.frame_layout_main_activity))
+        replaceFragment(ReplaceFragmentParameters(userDetails, R.id.frameUsersList))
     }
 
 }

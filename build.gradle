@@ -7,6 +7,7 @@ buildscript {
 
         classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltPluginVersion")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navigationSafeArgPlugin")
+
     }
 }
 

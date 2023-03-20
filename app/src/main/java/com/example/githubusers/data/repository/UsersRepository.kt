@@ -37,7 +37,7 @@ class UsersRepository @Inject constructor(
     override fun getAllUsers(): Flow<List<UsersItemEntity>> = usersDao.getAllUsers()
 
     override suspend fun getUserDetailApi(usersItemEntity: UsersItemEntity): UserDetailsEntity =
-        usersApi.getUserDetail(usersItemEntity.login!!)
+        usersApi.getUserDetail(usersItemEntity.login)
 
     override suspend fun updateUserDetailsById(id: Int) {
 
